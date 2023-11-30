@@ -1,0 +1,676 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Linux</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="56e48350-e5e9-4892-9ddd-503a71edc8b9" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/cd_gray.svg"/></div><h1 class="page-title">Linux</h1><p class="page-description"></p></header><div class="page-body"><ol type="1" id="88415a6f-9a3b-4b6e-b9a3-12108f049da6" class="numbered-list" start="1"><li><code>ls</code> (List):<ul id="ead15800-4fc5-41aa-b709-b8790df85cbc" class="bulleted-list"><li style="list-style-type:disc">Descripción: Este comando se utiliza para listar los archivos y directorios en el directorio actual.</li></ul><ul id="00499765-f4e4-419e-849f-da3f69bde556" class="bulleted-list"><li style="list-style-type:disc">Uso: Simplemente escribe <code>ls</code> en la terminal para listar el contenido del directorio actual. Puedes agregar opciones, como <code>l</code> para obtener una lista detallada o <code>a</code> para mostrar archivos ocultos.</li></ul></li></ol><ol type="1" id="e8a54f43-3c30-4d1e-9b1d-48c6edb54f1d" class="numbered-list" start="2"><li><code>cd</code> (Change Directory):<ul id="9c1a24f5-b630-4509-89e9-2b54218e1d6e" class="bulleted-list"><li style="list-style-type:disc">Descripción: Cambia el directorio actual al directorio especificado.</li></ul><ul id="3dd99676-2435-4f78-b9e4-44197d9783a6" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>cd</code> seguido de la ruta del directorio al que deseas cambiar. Por ejemplo, <code>cd /ruta/al/directorio</code> te llevará a ese directorio.</li></ul></li></ol><ol type="1" id="8cc439b0-74a6-43c1-ad2e-8f82ee281035" class="numbered-list" start="3"><li><code>pwd</code> (Print Working Directory):<ul id="be1c6c0b-2eb0-400e-a6af-9d1ee1a4de20" class="bulleted-list"><li style="list-style-type:disc">Descripción: Muestra la ruta completa del directorio actual.</li></ul><ul id="ec975fa6-4eb9-499e-9c20-35fa5f7ccc00" class="bulleted-list"><li style="list-style-type:disc">Uso: Simplemente ejecuta <code>pwd</code>, y te mostrará la ubicación actual en la estructura de directorios.</li></ul></li></ol><ol type="1" id="5069a210-6b71-4b70-8198-8a4dbeee50c7" class="numbered-list" start="4"><li><code>mkdir</code> (Make Directory):<ul id="c5c863e4-761c-4683-a749-31ad9245fe91" class="bulleted-list"><li style="list-style-type:disc">Descripción: Crea un nuevo directorio en la ubicación especificada.</li></ul><ul id="84554f0a-eb0e-4f01-9952-300653e74203" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>mkdir</code> seguido del nombre del nuevo directorio. Por ejemplo, <code>mkdir nombre_del_directorio</code> creará un directorio con ese nombre en el directorio actual.</li></ul></li></ol><ol type="1" id="89edc6fd-dbbf-400e-af07-fa82ccf4f63d" class="numbered-list" start="5"><li><code>rmdir</code> (Remove Directory):<ul id="eec208cf-de9a-4492-ab84-f47789b0df0f" class="bulleted-list"><li style="list-style-type:disc">Descripción: Elimina un directorio vacío.</li></ul><ul id="05f4854d-3932-4984-abb5-4ca68553a285" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>rmdir</code> seguido del nombre del directorio que deseas eliminar. Ten en cuenta que solo puedes eliminar directorios vacíos con este comando.</li></ul></li></ol><ol type="1" id="740b3535-3ce0-4112-be35-45033fbd5330" class="numbered-list" start="6"><li><code>rm</code> (Remove):<ul id="8318e665-55d1-431b-81ff-0ea21a00e577" class="bulleted-list"><li style="list-style-type:disc">Descripción: Elimina archivos o directorios.</li></ul><ul id="d3fadeee-26f2-4bc5-81a2-c8b69edfb1b2" class="bulleted-list"><li style="list-style-type:disc">Uso: Para eliminar un archivo, ejecuta <code>rm</code> seguido del nombre del archivo. Para eliminar un directorio y su contenido, usa la opción <code>r</code> (recursivo). Por ejemplo, <code>rm archivo.txt</code> eliminará el archivo y <code>rm -r directorio</code> eliminará un directorio y todo su contenido.</li></ul></li></ol><ol type="1" id="13bc6240-c704-46ee-9282-9f028e984349" class="numbered-list" start="7"><li><code>cp</code> (Copy):<ul id="6d05fef5-44e3-466c-bfb5-3ba0885db391" class="bulleted-list"><li style="list-style-type:disc">Descripción: Copia archivos o directorios.</li></ul><ul id="8615f265-2389-43f8-8eb7-099c2faa362f" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>cp</code> seguido del nombre del archivo o directorio que deseas copiar y la ubicación de destino. Por ejemplo, <code>cp archivo.txt destino/</code> copiará el archivo en el directorio de destino.</li></ul></li></ol><ol type="1" id="d572180d-3734-4888-bbb9-472d122b71e2" class="numbered-list" start="8"><li><code>mv</code> (Move):<ul id="6b20c20e-be4a-458c-82de-70531e74016a" class="bulleted-list"><li style="list-style-type:disc">Descripción: Mueve o renombra archivos y directorios.</li></ul><ul id="d9aa3e3c-a5f8-4f6e-999b-7fdee3ae4463" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>mv</code> seguido del nombre del archivo o directorio que deseas mover y la ubicación de destino. También puedes utilizarlo para renombrar archivos al especificar un nuevo nombre en lugar de una ubicación.</li></ul></li></ol><ol type="1" id="ff4f4d23-a41e-44ab-b611-06a3e1c841c5" class="numbered-list" start="9"><li><code>touch</code>:<ul id="41a396fb-2e3c-4322-b417-d627de3f12c6" class="bulleted-list"><li style="list-style-type:disc">Descripción: Crea un archivo vacío con el nombre especificado.</li></ul><ul id="f597d85b-3a73-44ea-9486-9f4efbc21b3c" class="bulleted-list"><li style="list-style-type:disc">Uso: Simplemente ejecuta <code>touch</code> seguido del nombre del archivo que deseas crear. Por ejemplo, <code>touch nuevo_archivo.txt</code> creará un archivo vacío llamado &quot;nuevo_archivo.txt&quot;.</li></ul><ol type="1" id="ec99f7e0-891d-4fe5-ac78-ea48c0bdd0f6" class="numbered-list" start="10"><li><code>cat</code> (Concatenate):</li></ol><ul id="77e30227-f4f6-4c9b-b674-391eefb84e41" class="bulleted-list"><li style="list-style-type:disc">Descripción: Muestra el contenido de uno o varios archivos en la terminal.</li></ul><ul id="68195489-796f-4047-9098-eac582dabd00" class="bulleted-list"><li style="list-style-type:disc">Uso: Simplemente ejecuta <code>cat</code> seguido de uno o varios nombres de archivos. Por ejemplo, <code>cat archivo.txt</code> mostrará el contenido del archivo en la terminal.</li></ul><ol type="1" id="c4ddc285-375f-4984-b7e5-ede509d145d5" class="numbered-list" start="11"><li><code>less</code> y <code>more</code>:</li></ol><ul id="bf44430a-e597-4202-9417-0504dacd42e2" class="bulleted-list"><li style="list-style-type:disc">Descripción: Estos comandos permiten ver archivos de texto página por página, lo que es útil para visualizar archivos extensos.</li></ul><ul id="1a4ca03f-6a76-4c76-9434-9c6cfb16ee64" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>less nombre_de_archivo</code> o <code>more nombre_de_archivo</code>. Luego, puedes desplazarte hacia arriba o abajo utilizando las teclas de flecha o la barra espaciadora. Para salir, presiona la tecla &quot;q&quot;.</li></ul><ol type="1" id="f0c2a60d-77d7-4ab3-b47a-4f669a5400ae" class="numbered-list" start="12"><li><code>grep</code> (Global Regular Expression Print):</li></ol><ul id="11333d2e-96da-4f6a-acbb-27d77cb4435f" class="bulleted-list"><li style="list-style-type:disc">Descripción: Busca patrones en un archivo de texto y muestra las líneas que coinciden con esos patrones.</li></ul><ul id="a6831ec1-b69b-4d36-be19-6c93d0280e85" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>grep patrón archivo</code> para buscar un patrón específico en un archivo. Por ejemplo, <code>grep &quot;palabra_a_buscar&quot; archivo.txt</code> mostrará todas las líneas que contienen &quot;palabra_a_buscar&quot; en el archivo.</li></ul><ol type="1" id="9db1b6b9-ad88-43a7-b8ee-f3ea2f5aef9c" class="numbered-list" start="13"><li><code>echo</code>:</li></ol><ul id="0e388462-11b0-42ee-bab5-96887ec2d908" class="bulleted-list"><li style="list-style-type:disc">Descripción: Muestra texto en la pantalla o redirige texto a un archivo.</li></ul><ul id="554166b2-e593-454b-a84f-01c702b02735" class="bulleted-list"><li style="list-style-type:disc">Uso: Simplemente ejecuta <code>echo &quot;texto&quot;</code> seguido del texto que deseas mostrar en la pantalla. Puedes redirigir la salida a un archivo con <code>echo &quot;texto&quot; &gt; archivo.txt</code>.</li></ul><ol type="1" id="4881270b-e77c-4307-9fdc-6eebd878ee9d" class="numbered-list" start="14"><li><code>man</code> (Manual):</li></ol><ul id="6cbd3cbc-8485-4b4d-b426-24521aa6082f" class="bulleted-list"><li style="list-style-type:disc">Descripción: Muestra el manual o documentación de un comando específico.</li></ul><ul id="66e852dc-e7bc-4773-ad96-13ca088f0b6d" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>man nombre_de_comando</code> para obtener información detallada sobre cómo usar ese comando. Por ejemplo, <code>man ls</code> proporcionará el manual del comando <code>ls</code>.</li></ul><ol type="1" id="c5f6ccba-22f5-4608-800b-df78f9d5efc4" class="numbered-list" start="15"><li><code>chmod</code> (Change Mode):</li></ol><ul id="18e07c88-2385-4a6a-a047-215fde9c3c0d" class="bulleted-list"><li style="list-style-type:disc">Descripción: Cambia los permisos de archivos y directorios, permitiendo o denegando el acceso a usuarios y grupos.</li></ul><ul id="1c3726fb-66bb-4674-b09a-0fec1754a932" class="bulleted-list"><li style="list-style-type:disc">Uso: Utiliza <code>chmod</code> seguido de la notación octal (por ejemplo, <code>chmod 755 archivo.txt</code>) o la notación simbólica (por ejemplo, <code>chmod u+r archivo.txt</code>) para cambiar los permisos.</li></ul><ol type="1" id="e26d4530-0dcc-4e71-adad-7458dbce1eff" class="numbered-list" start="16"><li><code>chown</code> (Change Owner):</li></ol><ul id="b1658267-2ffe-4d3e-a3d1-9b8e34bfd6ba" class="bulleted-list"><li style="list-style-type:disc">Descripción: Cambia el propietario de archivos y directorios.</li></ul><ul id="bbbc0ea8-c2a6-46b0-92a4-98f83997bbc6" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>chown nuevo_propietario archivo</code> para cambiar el propietario de un archivo. Por ejemplo, <code>chown nuevo_usuario archivo.txt</code> cambiará el propietario del archivo.</li></ul><ol type="1" id="40e86691-00af-46fb-b6b7-e85d4fdfbb6a" class="numbered-list" start="17"><li><code>ps</code> (Process Status):</li></ol><ul id="f7fe4178-4310-45c4-abd2-90de62d43159" class="bulleted-list"><li style="list-style-type:disc">Descripción: Muestra información sobre los procesos en ejecución en el sistema.</li></ul><ul id="8960235e-4dfd-47ea-9bdc-21a7e6a02edf" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>ps</code> para obtener una lista de procesos en ejecución. Puedes usar diferentes opciones para personalizar la salida, como <code>ps aux</code> para obtener información más detallada.</li></ul><ol type="1" id="de6f5c87-c025-4628-bb31-2734d1658458" class="numbered-list" start="18"><li><code>kill</code>:</li></ol><ul id="4a551906-5bb7-49e5-a951-c9ea553578bf" class="bulleted-list"><li style="list-style-type:disc">Descripción: Detiene un proceso en ejecución enviándole una señal de terminación.</li></ul><ul id="b354469b-3694-48ad-9a9b-4af88ab79fc0" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>kill ID_de_proceso</code> para detener un proceso específico. El ID de proceso se obtiene a través de <code>ps</code> u otros comandos.</li></ul><ol type="1" id="ccc62a9c-43d9-436f-aa2f-6f35d4a2a0c2" class="numbered-list" start="19"><li><code>find</code>:</li></ol><ul id="2130bad2-d4dd-410b-8703-f9e85d4092f0" class="bulleted-list"><li style="list-style-type:disc">Descripción: Busca archivos y directorios en una jerarquía de directorios.</li></ul><ul id="78431c0c-3dfc-4ccc-b28f-9cee07616294" class="bulleted-list"><li style="list-style-type:disc">Uso: <code>find</code> seguido de la ruta de inicio y opciones de búsqueda. Por ejemplo, <code>find /ruta/inicial -name &quot;*.txt&quot;</code> buscará archivos con extensión <code>.txt</code> en el directorio especificado.</li></ul><ol type="1" id="6df02562-8e32-4f09-9f3f-66b818ffd13c" class="numbered-list" start="20"><li><code>tar</code> (Tape Archive):</li></ol><ul id="1e011d06-6c73-4810-8866-6107824277ed" class="bulleted-list"><li style="list-style-type:disc">Descripción: Permite la compresión y extracción de archivos y directorios en archivos de respaldo.</li></ul><ul id="de5ca5dd-2a54-443e-9d83-152ba523cbb8" class="bulleted-list"><li style="list-style-type:disc">Uso: <code>tar</code> seguido de opciones como <code>cvzf</code> para crear un archivo tar comprimido y <code>xvf</code> para extraerlo. Por ejemplo, <code>tar -czvf archivo.tar.gz directorio/</code> comprimirá un directorio en un archivo tar.gz.</li></ul><ol type="1" id="4699e3f3-467d-4af1-9571-e7982f75dcdb" class="numbered-list" start="21"><li><code>cpio</code> (Copy In and Out):</li></ol><ul id="644f7d5a-c05c-49f7-99cf-1f1c1aad7c6f" class="bulleted-list"><li style="list-style-type:disc">Descripción: Permite copiar archivos a y desde archivos cpio, que son otro formato de archivo de respaldo.</li></ul><ul id="00bc476d-c1ec-4229-8285-42b2f14ff47b" class="bulleted-list"><li style="list-style-type:disc">Uso: Puedes crear un archivo cpio con <code>find</code> y luego copiar archivos en él con <code>cpio</code>. Por ejemplo, <code>find /ruta/inicial -type f | cpio -ov &gt; archivo.cpio</code> crea un archivo cpio a partir de una lista de archivos.</li></ul><ol type="1" id="2da7d39e-52f8-451a-952e-fa7ff63378df" class="numbered-list" start="22"><li><code>dd</code> (Data Description):</li></ol><ul id="22ab120a-0514-47da-8e73-cfd630641f28" class="bulleted-list"><li style="list-style-type:disc">Descripción: Copia y convierte archivos y bloques de datos.</li></ul><ul id="ac8c4b8d-59ba-492d-9197-2d5fde2aaae4" class="bulleted-list"><li style="list-style-type:disc">Uso: Es útil para crear imágenes de discos o copiar datos de un lugar a otro. Por ejemplo, <code>dd if=/dev/sda of=imagen_de_disco.img</code> copiará el contenido de <code>/dev/sda</code> a un archivo de imagen de disco.</li></ul><ol type="1" id="c2fce6e0-4ad8-41c8-9cbd-723f1aa5741e" class="numbered-list" start="23"><li><code>ssh</code> (Secure Shell):</li></ol><ul id="d534bd67-7a74-4f01-a060-b3b286454554" class="bulleted-list"><li style="list-style-type:disc">Descripción: Permite acceder de forma segura a otros sistemas a través de una conexión SSH.</li></ul><ul id="6210a5bf-d879-4925-beb9-21734897f7fc" class="bulleted-list"><li style="list-style-type:disc">Uso: <code>ssh usuario@servidor</code> establece una conexión SSH con un servidor remoto. Luego, se te pedirá que ingreses la contraseña o utilices autenticación mediante clave.</li></ul><ol type="1" id="36612832-baae-4083-9dbf-e96bfde86946" class="numbered-list" start="24"><li><code>scp</code> (Secure Copy):</li></ol><ul id="cd000d5a-0883-430f-bd72-a75b27098049" class="bulleted-list"><li style="list-style-type:disc">Descripción: Copia archivos de forma segura entre sistemas locales y remotos a través de SSH.</li></ul><ul id="3eb38b1c-b26b-474a-b4c2-bf4545c6d027" class="bulleted-list"><li style="list-style-type:disc">Uso: <code>scp origen usuario@servidor:destino</code> copiará un archivo desde el sistema local al sistema remoto a través de SSH.</li></ul><ol type="1" id="1749a23d-1893-44d1-9574-6bd116f49283" class="numbered-list" start="25"><li><code>rsync</code>:</li></ol><ul id="85665fd6-9909-4c39-9378-2604b983b214" class="bulleted-list"><li style="list-style-type:disc">Descripción: Sincroniza archivos y directorios de forma eficiente entre sistemas locales y remotos.</li></ul><ul id="c200b669-0885-4686-85a7-fbd8fa2b5644" class="bulleted-list"><li style="list-style-type:disc">Uso: <code>rsync opciones origen destino</code> permite realizar copias incrementales y sincronización de datos entre sistemas.</li></ul><ol type="1" id="a6d35c31-2d5a-4d22-ae4d-049d6a37ce8b" class="numbered-list" start="26"><li><code>wget</code>:</li></ol><ul id="730fc649-4076-4eb0-ba28-79b6fdb39c5a" class="bulleted-list"><li style="list-style-type:disc">Descripción: Descarga archivos desde la web a través de HTTP, HTTPS o FTP.</li></ul><ul id="38764fd8-d85d-4b70-a314-3450f01d6948" class="bulleted-list"><li style="list-style-type:disc">Uso: <code>wget URL</code> descargará el archivo especificado en la URL a tu sistema local.</li></ul><ol type="1" id="1045e440-cfca-49f2-9575-8c86b0b6b4e1" class="numbered-list" start="27"><li><code>curl</code>:</li></ol><ul id="206f887e-5392-4b63-9b05-922cd3a626be" class="bulleted-list"><li style="list-style-type:disc">Descripción: Permite realizar solicitudes HTTP y mostrar la respuesta en la terminal.</li></ul><ul id="7f68a8e4-b738-4165-8f0e-be316407d2a6" class="bulleted-list"><li style="list-style-type:disc">Uso: <code>curl URL</code> obtendrá el contenido de la URL y lo mostrará en la terminal.</li></ul><ol type="1" id="62d45630-fa57-4c72-90dc-0b4b554b99e8" class="numbered-list" start="28"><li><code>top</code>:</li></ol><ul id="49724efd-f626-4e72-a2b0-6752f98c5cc2" class="bulleted-list"><li style="list-style-type:disc">Descripción: Muestra una lista en tiempo real de los procesos en ejecución y su uso de recursos.</li></ul><ul id="0dc45212-3296-4ef9-8f31-47bbbce5564a" class="bulleted-list"><li style="list-style-type:disc">Uso: Simplemente ejecuta <code>top</code> en la terminal para ver una lista actualizada de procesos. Puedes utilizar atajos de teclado para realizar acciones, como matar procesos.</li></ul></li></ol><p id="b8c698d7-4a77-42ef-93c7-58ea07d81538" class=""><strong>Comandos de superusuario:</strong></p><ol type="1" id="b7a7546f-ab90-4544-86f0-7f4aff39e214" class="numbered-list" start="1"><li><code>su</code> (Switch User):<ul id="849e35bd-47b7-4f87-a753-83dc78f08756" class="bulleted-list"><li style="list-style-type:disc">Descripción: Permite cambiar al usuario superusuario (root) o a otro usuario.</li></ul><ul id="039dd891-8498-4b4e-8dba-59f344b26007" class="bulleted-list"><li style="list-style-type:disc">Uso: Para cambiar al superusuario, ejecuta <code>su</code> y proporciona la contraseña de root. Para cambiar a otro usuario, ejecuta <code>su nombre_de_usuario</code>.</li></ul></li></ol><ol type="1" id="7d252a36-181a-4003-989e-0fd20a6b09dc" class="numbered-list" start="2"><li><code>sudo</code> (Superuser Do):<ul id="e0cf4ebd-9492-4ca7-8dfb-f0c62ffa79a8" class="bulleted-list"><li style="list-style-type:disc">Descripción: Permite a un usuario común ejecutar comandos con permisos de superusuario.</li></ul><ul id="efaa75ed-db14-440d-a096-d84fa037d631" class="bulleted-list"><li style="list-style-type:disc">Uso: Antepon el comando que deseas ejecutar con <code>sudo</code>. Por ejemplo, <code>sudo apt-get update</code> actualizará el sistema utilizando <code>apt</code>.</li></ul></li></ol><p id="02352bee-f966-44b3-ae90-9541fad6cd28" class=""><strong>Comandos de instalación y desinstalación de paquetes:</strong></p><ol type="1" id="36ab3af9-ad0a-452a-a40d-e57f0966b6d3" class="numbered-list" start="1"><li><code>apt</code> (Advanced Package Tool):<ul id="f05c988b-5329-42ae-869a-db0d9825aaa1" class="bulleted-list"><li style="list-style-type:disc">Descripción: Utilizado en sistemas basados en Debian (como Ubuntu) para gestionar paquetes.</li></ul><ul id="14a8a5ae-3f95-4028-81ea-82712c2b384f" class="bulleted-list"><li style="list-style-type:disc">Uso:<ul id="fccbc286-4ffc-4d1e-a214-788db9cebcde" class="bulleted-list"><li style="list-style-type:circle"><code>apt update</code>: Actualiza la lista de paquetes.</li></ul><ul id="cb547ef7-7527-4dd6-ab92-44fe18670518" class="bulleted-list"><li style="list-style-type:circle"><code>apt install nombre_del_paquete</code>: Instala un paquete.</li></ul><ul id="2a696833-0746-41d1-8e5a-105a8849f962" class="bulleted-list"><li style="list-style-type:circle"><code>apt remove nombre_del_paquete</code>: Desinstala un paquete.</li></ul><ul id="20ac178e-bf2f-4224-8460-40a82e438df4" class="bulleted-list"><li style="list-style-type:circle"><code>apt search término_de_búsqueda</code>: Busca paquetes.</li></ul></li></ul></li></ol><ol type="1" id="621b2f0a-f817-4a6a-bb6c-55bdee2dbfea" class="numbered-list" start="2"><li><code>yum</code>:<ul id="333857d7-1f70-4b0a-a4d0-a19036602e43" class="bulleted-list"><li style="list-style-type:disc">Descripción: Utilizado en sistemas basados en Red Hat (como CentOS) para gestionar paquetes.</li></ul><ul id="70a959a8-6e68-4666-b78e-f64f1053ff54" class="bulleted-list"><li style="list-style-type:disc">Uso:<ul id="b286d582-eb11-4e5d-be2c-2b5824bdcdd7" class="bulleted-list"><li style="list-style-type:circle"><code>yum update</code>: Actualiza los paquetes.</li></ul><ul id="32ca3e5b-9dfe-4bf9-992a-7e47c37e4c4b" class="bulleted-list"><li style="list-style-type:circle"><code>yum install nombre_del_paquete</code>: Instala un paquete.</li></ul><ul id="70e3854a-3d43-48ba-bce3-e7a29ddb237e" class="bulleted-list"><li style="list-style-type:circle"><code>yum remove nombre_del_paquete</code>: Desinstala un paquete.</li></ul><ul id="edabb63c-3d02-45f4-8ee6-bd16adf4b427" class="bulleted-list"><li style="list-style-type:circle"><code>yum search término_de_búsqueda</code>: Busca paquetes.</li></ul></li></ul></li></ol><ol type="1" id="ec6bee39-ac78-443c-a596-9c0f77ceeab0" class="numbered-list" start="3"><li><code>dpkg</code> (Debian Package):<ul id="7176143d-c14f-4194-a455-d156f2c91d40" class="bulleted-list"><li style="list-style-type:disc">Descripción: Utilizado en sistemas basados en Debian para trabajar con paquetes de manera más directa.</li></ul><ul id="cd8030fe-e2f5-4422-8de2-957f8d3a92b2" class="bulleted-list"><li style="list-style-type:disc">Uso:<ul id="751e6d8b-4798-45b0-8089-fd9ebb0baffd" class="bulleted-list"><li style="list-style-type:circle"><code>dpkg -i paquete.deb</code>: Instala un paquete desde un archivo .deb.</li></ul><ul id="3e5c66ca-b112-47ef-b0ac-9a4b8785d396" class="bulleted-list"><li style="list-style-type:circle"><code>dpkg -r nombre_del_paquete</code>: Desinstala un paquete.</li></ul><ul id="5f41b91b-bb4a-4693-86b7-90ef6659b86d" class="bulleted-list"><li style="list-style-type:circle"><code>dpkg -l</code>: Lista todos los paquetes instalados.</li></ul></li></ul></li></ol><p id="5c454bbf-2014-4e73-b8a1-02be5bd7d6bf" class=""><strong>Comandos de procesos generales:</strong></p><ol type="1" id="769768b2-d60a-41b0-87ab-b0165f5657c0" class="numbered-list" start="1"><li><code>ps</code> (Process Status):<ul id="42da35c6-5d5b-40ed-9914-f46a19603f22" class="bulleted-list"><li style="list-style-type:disc">Descripción: Muestra información sobre los procesos en ejecución.</li></ul><ul id="734a79ef-56da-4a18-a7e7-4bbb7fe6ba88" class="bulleted-list"><li style="list-style-type:disc">Uso:<ul id="a83a3621-3541-4a91-9413-bf1a9e41cf7e" class="bulleted-list"><li style="list-style-type:circle"><code>ps</code>: Muestra los procesos del usuario actual.</li></ul><ul id="23195565-dc00-4a64-8cca-68721f8be0a0" class="bulleted-list"><li style="list-style-type:circle"><code>ps aux</code>: Muestra una lista detallada de todos los procesos en el sistema.</li></ul></li></ul></li></ol><ol type="1" id="9716e703-1f19-4111-bdfb-9e9b8137355f" class="numbered-list" start="2"><li><code>kill</code>:<ul id="f8236e6c-0cd3-41f8-bf9e-a33ef4fa96fe" class="bulleted-list"><li style="list-style-type:disc">Descripción: Detiene procesos en ejecución.</li></ul><ul id="e2061dab-18b3-4a59-b0d0-89727c04f001" class="bulleted-list"><li style="list-style-type:disc">Uso: Usa <code>kill</code> seguido del ID de proceso (PID) para detener un proceso. Por ejemplo, <code>kill PID</code> detendrá el proceso con ese PID.</li></ul></li></ol><ol type="1" id="193bd710-d2b1-4237-ba3a-b389a7d5cd3d" class="numbered-list" start="3"><li><code>top</code>:<ul id="a33ca94d-740f-4f59-a0ec-03a3a6da91e1" class="bulleted-list"><li style="list-style-type:disc">Descripción: Muestra una lista en tiempo real de los procesos y su uso de recursos.</li></ul><ul id="91533002-63ba-409b-af6c-41d5d946de69" class="bulleted-list"><li style="list-style-type:disc">Uso: Simplemente ejecuta <code>top</code> en la terminal para ver una lista actualizada de procesos. Puedes utilizar atajos de teclado para realizar acciones, como matar procesos.</li></ul></li></ol><ol type="1" id="64b074ce-1975-4778-8e53-e69cba400292" class="numbered-list" start="4"><li><code>htop</code>:<ul id="cd6f5e2f-0b60-4e47-9f01-ff8c30d7b865" class="bulleted-list"><li style="list-style-type:disc">Descripción: Una alternativa más avanzada a <code>top</code> con una interfaz de usuario más amigable.</li></ul><ul id="4f9dde65-2d5e-471e-ba38-f9172e1aba26" class="bulleted-list"><li style="list-style-type:disc">Uso: Ejecuta <code>htop</code> en la terminal para obtener una vista en tiempo real de los procesos.</li></ul></li></ol></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
