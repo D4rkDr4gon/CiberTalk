@@ -2,7 +2,7 @@
 title: "Roles De La Ciberseguridad"
 output:
   html_document:
-    css: style.css
+    css: styleRC.css
 ---
 
 # Roles de la Ciberseguridad
