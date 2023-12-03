@@ -1,0 +1,767 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>herramientas</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b5cb1565-fe7b-46b6-adfd-e1c7a4d62d7a" class="page mono"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/wrench_gray.svg"/></div><h1 class="page-title">herramientas</h1><p class="page-description"></p></header><div class="page-body"><h1 id="5c5a51de-5595-4cab-9824-284ae4296ad7" class="">Nmap</h1><p id="170134ab-3bd4-4d27-8c27-889fa6c70de7" class="">Nmap es una herramienta extremadamente versátil para el escaneo de redes y la evaluación de seguridad. A continuación, te proporcionaré una lista de las principales cosas que puedes hacer con Nmap, junto con una breve explicación de cada una:</p><ol type="1" id="82d227a8-e436-4e97-b52e-529a9c9f6c7d" class="numbered-list" start="1"><li><strong>Descubrir dispositivos activos en una red:</strong>
+Puedes usar Nmap para identificar qué dispositivos están activos en una red, ya sea una dirección IP específica, una subred o un rango de direcciones IP. Esto te permite conocer qué dispositivos están conectados y responden en una red.</li></ol><ol type="1" id="ae52fde9-89b6-4bfc-8149-2cc8b20a7544" class="numbered-list" start="2"><li><strong>Escanear puertos en un dispositivo:</strong>
+Nmap te permite identificar los puertos abiertos en un dispositivo. Esto es útil para determinar qué servicios están en ejecución y potencialmente vulnerabilidades.</li></ol><ol type="1" id="fdd5f7da-840e-4d91-bf34-411aec9b9f09" class="numbered-list" start="3"><li><strong>Identificar servicios y versiones:</strong>
+Con Nmap, puedes descubrir qué servicios se están ejecutando en los puertos abiertos y obtener información sobre las versiones de software de esos servicios. Esto es útil para conocer más sobre los servicios expuestos y las posibles vulnerabilidades asociadas.</li></ol><ol type="1" id="3e739986-b9bd-489a-b50a-3d2cfd5a6bba" class="numbered-list" start="4"><li><strong>Adivinar el sistema operativo:</strong>
+Nmap puede intentar adivinar el sistema operativo del dispositivo objetivo, lo que te permite conocer el tipo de sistema que está en uso.</li></ol><ol type="1" id="d73b1943-0534-451d-abd6-230322bd18ee" class="numbered-list" start="5"><li><strong>Escaneo rápido:</strong>
+Puedes realizar escaneos más rápidos utilizando opciones como <code>F</code>, que se enfocan en los puertos más comunes, para obtener resultados rápidos en entornos donde el tiempo es crítico.</li></ol><ol type="1" id="0205c30a-002b-414a-8408-000745783ca8" class="numbered-list" start="6"><li><strong>Escaneo de red completo o parcial:</strong>
+Puedes escanear una dirección IP específica, un rango de direcciones IP o incluso una red completa para obtener una visión completa de los dispositivos y servicios en una red.</li></ol><ol type="1" id="e358d776-3046-4240-8632-c99fe23aa3ff" class="numbered-list" start="7"><li><strong>Escaneo en modo silencioso:</strong>
+Nmap permite realizar escaneos sin mostrar la salida en la pantalla. Puedes guardar los resultados en un archivo para su posterior análisis.</li></ol><ol type="1" id="18aa61c0-b35f-46ed-981d-d6362d8d2379" class="numbered-list" start="8"><li><strong>Utilizar scripts NSE:</strong>
+Nmap Scripting Engine (NSE) es un potente motor de scripting que te permite realizar escaneos y pruebas personalizadas. Puedes utilizar scripts predefinidos o escribir los tuyos propios para llevar a cabo tareas específicas, como escanear vulnerabilidades, detectar servicios específicos o realizar auditorías de seguridad.</li></ol><ol type="1" id="02d6ad21-87a9-4f39-9e99-149d1dcc8dc7" class="numbered-list" start="9"><li><strong>Escaneo de firewall y filtrado de paquetes:</strong>
+Nmap puede ayudarte a evaluar la efectividad de un firewall o las reglas de filtrado de paquetes. Puedes realizar escaneos para determinar qué puertos están filtrados o bloqueados.</li></ol><ol type="1" id="1e27ccee-9435-4732-9034-8c74c9dbef7c" class="numbered-list" start="10"><li><strong>Escaneo de scripts de seguridad:</strong>
+Puedes utilizar Nmap para ejecutar scripts de seguridad específicos, como <code>smb-vuln-*, ftp-anon</code>, para buscar vulnerabilidades o configuraciones inseguras en servicios.</li></ol><ol type="1" id="6725668b-d3c8-4859-9503-45ac5c93a48b" class="numbered-list" start="11"><li><strong>Escaneo de subdominios:</strong>
+Nmap puede ayudarte a identificar subdominios activos al escanear un rango de direcciones IP o un dominio específico.</li></ol><ol type="1" id="c0ea8848-063c-469a-bdbc-d09ad3448f20" class="numbered-list" start="12"><li><strong>Identificar dispositivos IoT:</strong>
+Nmap puede ser útil para detectar dispositivos IoT (Internet de las cosas) en una red, lo que es esencial para garantizar la seguridad de la IoT.</li></ol><ol type="1" id="67605453-37ec-4be3-a92f-1c1cc2fb62bb" class="numbered-list" start="13"><li><strong>Escanear una dirección IP o un rango de direcciones IP:</strong><pre id="daaace4b-d0fe-4f17-8650-5cfbadceec31" class="code code-wrap"><code>nmap 192.168.1.1
+nmap 192.168.1.1-50
+</code></pre></li></ol><ol type="1" id="791acef5-cd5a-44d6-b5b9-b30f3344bfce" class="numbered-list" start="14"><li><strong>Escanear todos los puertos en un host:</strong><pre id="3de850ea-b8b5-48ae-89c5-0525dae6b768" class="code code-wrap"><code>nmap -p- &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="cb0dc01e-d52e-4ae7-9d24-76858eabd848" class="numbered-list" start="15"><li><strong>Escanear puertos comunes (Top 1000):</strong><pre id="741ad5b1-e4b8-4165-b289-045c571d8fff" class="code code-wrap"><code>nmap -F &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="1cf56cb2-0f14-4ee6-b20b-67134865cd75" class="numbered-list" start="16"><li><strong>Identificar servicios y versiones:</strong><pre id="2869e2bc-0e34-4d17-94c9-d9c2653f6094" class="code code-wrap"><code>nmap -sV &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="8878d1c7-4540-4c40-a7a0-5cf3ff693982" class="numbered-list" start="17"><li><strong>Adivinar el sistema operativo del objetivo:</strong><pre id="eb1d41c1-a006-467a-8ddb-c3960ea1f553" class="code code-wrap"><code>nmap -O &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="5663d3d6-5eed-4ed4-ab38-64423740ecf5" class="numbered-list" start="18"><li><strong>Guardar resultados en un archivo de texto:</strong><pre id="63918aeb-8b9d-4532-bac6-3c0444e737b5" class="code code-wrap"><code>nmap -oN resultado.txt &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="3b178330-0e26-4c05-99ab-28fc67a1fdce" class="numbered-list" start="19"><li><strong>Escanear una red completa (subred):</strong><pre id="86e14511-c455-46cf-951a-91603eaa92e0" class="code code-wrap"><code>nmap 192.168.1.0/24
+</code></pre></li></ol><ol type="1" id="72ae2ab2-5a45-4166-a40b-5f509c80f1af" class="numbered-list" start="20"><li><strong>Utilizar scripts NSE predefinidos:</strong><pre id="75b920e1-445e-4c34-9b4c-a32ccdb08e99" class="code code-wrap"><code>nmap --script vuln &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="3015ebf9-83c2-4608-a47d-a202fcf8aab8" class="numbered-list" start="21"><li><strong>Escanear en modo sigiloso (sin salida en pantalla):</strong><pre id="7ad64076-2c21-414b-9939-f26778e4742c" class="code code-wrap"><code>nmap -q &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="d5fe57ee-592e-46e7-bda3-36bdd522a89d" class="numbered-list" start="22"><li><strong>Identificar subdominios activos de un dominio:</strong><pre id="1abde54a-9ef7-4ba2-8a14-958eb10d2c56" class="code code-wrap"><code>nmap --script dns-brute &lt;dominio&gt;
+</code></pre></li></ol><ol type="1" id="2c002433-1018-4900-97b7-0284de4f3240" class="numbered-list" start="23"><li><strong>Escaneo de firewall y filtrado de paquetes:</strong><pre id="d6735ff2-d931-46bd-b9b2-df6775fae425" class="code code-wrap"><code>nmap -sA &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="7604f501-2a78-4dec-b435-4bc764778be6" class="numbered-list" start="24"><li><strong>Escanear una red con un rango de puertos personalizado:</strong><pre id="2073790d-be2a-4942-8a96-445e0e6c2edd" class="code code-wrap"><code>nmap -p 80,443,8080,8081 &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="fa805ce0-ed83-4f2d-8ef3-6eddfce0fe60" class="numbered-list" start="25"><li><strong>Escanear varios objetivos desde un archivo:</strong><pre id="e62a2864-2e7b-4719-acc6-d438abe45fc3" class="code code-wrap"><code>nmap -iL lista_de_direcciones.txt
+</code></pre></li></ol><ol type="1" id="a111e285-e021-40b3-9b56-79cb4c48f7bc" class="numbered-list" start="26"><li><strong>Realizar un escaneo rápido de ping para determinar qué hosts están activos:</strong><pre id="a5a4156b-f96b-4167-9fa1-59c9280ccd08" class="code code-wrap"><code>nmap -sn &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="3e6dd2c5-d9d7-4cc2-a52b-8e822b52f650" class="numbered-list" start="27"><li><strong>Escanear utilizando un rango de puertos personalizado:</strong><pre id="7e191507-148c-4a70-9c0a-6940ebab3b16" class="code code-wrap"><code>nmap -p 80-100,443 &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="cbb9f214-f3b2-4ab4-baae-089ffc9f4219" class="numbered-list" start="28"><li><strong>Escaneo UDP para identificar servicios que utilizan este protocolo:</strong><pre id="72299d74-8cbd-4752-bd6a-b36bb966a26b" class="code code-wrap"><code>nmap -sU &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="a76065c8-c0ed-48b5-afaf-036fe8857f81" class="numbered-list" start="29"><li><strong>Escaneo con un retraso personalizado entre paquetes:</strong><pre id="3052ef98-b2c7-4650-adcd-fc6decab273c" class="code code-wrap"><code>nmap --scan-delay 2s &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="19198905-7d52-47d6-a674-2033901613dd" class="numbered-list" start="30"><li><strong>Ignorar el archivo </strong><code><strong>nmap-services</strong></code><strong> para la identificación de servicios:</strong><pre id="2f3ddd49-d311-4097-8926-50484ca5741d" class="code code-wrap"><code>nmap --version-intensity 0 &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="fbf4480e-862f-427d-81f2-4272744b6637" class="numbered-list" start="31"><li><strong>Mostrar resultados en formato XML para su posterior análisis:</strong><pre id="d5df7b62-e333-44df-9221-6aa8eecc5b89" class="code code-wrap"><code>nmap -oX resultado.xml &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="58fd02bc-83d4-448a-b377-c6078f5dc2f0" class="numbered-list" start="32"><li><strong>Escanear usando técnicas de fragmentación y evasión de firewall:</strong><pre id="cc87c9a7-ef35-4b6b-9843-bc82fb673bb5" class="code code-wrap"><code>nmap -f -D RND:10 &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="c4228bae-9f75-4296-adf5-1718f7e92528" class="numbered-list" start="33"><li><strong>Realizar un escaneo &quot;stealth&quot; (sigiloso) que oculta la identidad de Nmap:</strong><pre id="04d39b43-1082-415b-8dd0-4b5d8839b905" class="code code-wrap"><code>nmap -sS &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="faa2dfc5-997e-4c49-97d5-1972829a432d" class="numbered-list" start="34"><li><strong>Escanear utilizando un proxy SOCKS para ocultar la dirección IP de origen:</strong><pre id="23138be2-5c70-44cf-b0ea-9df8a90127e6" class="code code-wrap"><code>nmap --proxy socks4://proxy_ip:1080 &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="e5853e79-d52e-4bc9-8b91-096ad0d51cc1" class="numbered-list" start="35"><li><strong>Escanear solo hosts con el estado &quot;open&quot; (abierto):</strong><pre id="19ec5772-2851-4306-ba94-7206bce51b58" class="code code-wrap"><code>nmap --open &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="7b11e8ec-6f46-475b-9206-9131139fb289" class="numbered-list" start="36"><li><strong>Realizar un escaneo inverso DNS para obtener nombres de host:</strong><pre id="cd1c42b2-13e7-44a6-a342-a7eb1f5f68a9" class="code code-wrap"><code>nmap -R &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><ol type="1" id="bef25b8b-2258-4965-80b8-7c6a6c07ee3d" class="numbered-list" start="37"><li><strong>Escanear usando un script personalizado de NSE:</strong><pre id="28a633de-2708-4f6c-833b-505aac94bc3d" class="code code-wrap"><code>nmap --script my_custom_script.nse &lt;dirección_IP_objetivo&gt;
+</code></pre></li></ol><hr id="5cf2f758-e53c-4240-b0c3-82ac520de1fe"/><hr id="ae472ae6-549c-4a6f-b4d3-94a2124cffec"/><h1 id="a229120b-e74d-4af3-a8e2-dded702dd439" class="">Hydra</h1><p id="664be3db-aab5-4dd8-a03e-8f5c87780708" class="">Hydra es una herramienta muy versátil con una amplia gama de opciones y protocolos que pueden ser utilizados en combinación con ella. A continuación, te proporciono una descripción de los comandos y opciones más comunes en Hydra:</p><ol type="1" id="e8327698-bca8-49de-8e40-c385150debbf" class="numbered-list" start="1"><li><code>l [nombre de usuario]</code> o <code>-login [nombre de usuario]</code>: Especifica el nombre de usuario que se utilizará en la prueba de fuerza bruta.</li></ol><ol type="1" id="d90a269b-42ba-4273-9c57-514f106d6475" class="numbered-list" start="2"><li><code>L [archivo de usuarios]</code>: Permite especificar un archivo que contiene una lista de nombres de usuario para probar.</li></ol><ol type="1" id="70c12b5b-223e-477d-8d50-3f80eb8f1738" class="numbered-list" start="3"><li><code>p [contraseña]</code> o <code>-password [contraseña]</code>: Especifica una contraseña única que se probará.</li></ol><ol type="1" id="ea0e337d-53ed-45bc-bcde-0b518eceed48" class="numbered-list" start="4"><li><code>P [archivo de contraseñas]</code>: Permite especificar un archivo de contraseñas o diccionario que Hydra utilizará en la prueba de fuerza bruta.</li></ol><ol type="1" id="b88406f5-dec3-4bb5-8783-d361e379fefe" class="numbered-list" start="5"><li><code>e ns</code> o <code>-empty-password [código de retorno]</code>: Configura el código de retorno que indica una contraseña vacía (ninguna contraseña).</li></ol><ol type="1" id="355e38af-57b0-40a9-858e-45bb048444b8" class="numbered-list" start="6"><li><code>s [puerto]</code> o <code>-service [puerto]</code>: Especifica el puerto del servicio objetivo (por defecto, se utiliza el puerto predeterminado para el protocolo).</li></ol><ol type="1" id="5f885b79-7121-4e9a-97de-effee67f3b5b" class="numbered-list" start="7"><li><code>t [número de hilos]</code> o <code>-threads [número de hilos]</code>: Define el número de hilos que Hydra utilizará para realizar el ataque de fuerza bruta. El uso de múltiples hilos acelera el proceso, pero ten en cuenta que puede aumentar la probabilidad de ser detectado.</li></ol><ol type="1" id="c3a27fc3-9cba-4487-9e90-3e42be2e4a26" class="numbered-list" start="8"><li><code>f</code> o <code>-forever</code>: Realiza un ataque de fuerza bruta de manera continua sin detenerse después de encontrar una contraseña válida.</li></ol><ol type="1" id="7a8a92e8-e509-4036-9bc5-e958ae46a658" class="numbered-list" start="9"><li><code>vV</code> o <code>-verbose</code>: Muestra información detallada durante la ejecución de Hydra.</li></ol><ol type="1" id="c28ef2d8-0c3b-49d0-bbe3-f13a95ad8ade" class="numbered-list" start="10"><li><code>-f [formato]</code> o <code>-format [formato]</code>: Permite especificar el formato del archivo de contraseñas. Los formatos comunes son &quot;simple&quot; (nombre de usuario:contraseña) y &quot;web1&quot; (nombre de usuario:contraseña1 contraseña2).</li></ol><ol type="1" id="15831e63-0796-4441-bde0-e4004082c99b" class="numbered-list" start="11"><li><code>M [archivo de hosts]</code> o <code>-M [archivo de hosts]</code>: Especifica un archivo que contiene una lista de direcciones IP o nombres de host para probar.</li></ol><ol type="1" id="9018783a-9f4c-4cc6-9a48-c0321b1fe809" class="numbered-list" start="12"><li><code>o [archivo de salida]</code> o <code>-output [archivo de salida]</code>: Guarda los resultados de la prueba de fuerza bruta en un archivo.</li></ol><ol type="1" id="6f5dd320-3823-4b4a-a0b8-777bfc4cca5b" class="numbered-list" start="13"><li><code>-timeout [segundos]</code>: Define el tiempo de espera para cada intento de conexión.</li></ol><ol type="1" id="081e7cfb-e83f-4826-af07-a16e52aa0617" class="numbered-list" start="14"><li><code>-no-restart</code>: Impide que Hydra vuelva a intentar después de encontrar una contraseña válida.</li></ol><ol type="1" id="aad97220-e4d0-4f67-a4f0-1398a1d364ef" class="numbered-list" start="15"><li><code>-no-restore</code>: Evita que Hydra restablezca los intentos de fuerza bruta cuando se reinicia.</li></ol><ol type="1" id="2341268e-ceb5-4484-b965-ddff3bdc04d0" class="numbered-list" start="16"><li><code>-status [archivo de estado]</code>: Permite guardar y cargar el estado de un ataque en curso.</li></ol><ol type="1" id="bba1157b-b4ba-42dd-b4d5-d07631493137" class="numbered-list" start="17"><li><code>-history [archivo de historial]</code>: Registra el historial de los intentos de autenticación.</li></ol><ol type="1" id="b6b06b16-95c6-4d8e-a0ea-e3bae2fa57a3" class="numbered-list" start="18"><li><code>-disable [módulo]</code>: Desactiva un módulo de autenticación específico. Por ejemplo, <code>-disable ftp</code> deshabilitaría el módulo de FTP.</li></ol><ol type="1" id="d709b487-8f05-4f65-8807-47ad17e99664" class="numbered-list" start="19"><li><code>-crack-status [código de retorno]</code>: Configura el código de retorno que indica que se ha encontrado una contraseña válida.</li></ol><ol type="1" id="e8e1256b-0f28-46d2-9d93-f8dbf320d8b9" class="numbered-list" start="20"><li><code>-version</code>: Muestra la versión de Hydra.</li></ol><p id="f7ea55f2-6b5a-4aea-8bdc-88873cc36e49" class="">Es importante tener en cuenta que la sintaxis exacta y las opciones pueden variar según el protocolo que estés atacando. Para obtener información detallada sobre las opciones y la sintaxis de un protocolo específico, puedes consultar la documentación oficial de Hydra o utilizar la opción <code>-U</code> para mostrar los módulos disponibles y luego consultar la documentación de un módulo específico.</p><hr id="6438f09f-c2d9-4fb4-abfe-d938634f058e"/><hr id="e08727c0-e3e8-4f63-b046-cf6487bcfa8f"/><h2 id="d1010292-9ca1-46af-8489-ff3d7bcba53a" class="">John The Ripper</h2><p id="0b3348c9-0967-4443-bf66-9c7c95dcf49f" class="">John the Ripper es una herramienta de cracking de contraseñas que es extremadamente versátil y potente. Aquí tienes una lista de algunos comandos y características clave de John the Ripper:</p><ol type="1" id="dfd4c655-fbb7-4587-b85f-c19bdc73c351" class="numbered-list" start="1"><li><strong>Crackear Contraseñas con Wordlist:</strong><pre id="381bd825-4258-4217-bd5f-e15c70592bdb" class="code code-wrap"><code>john --wordlist=&lt;Wordlist&gt; &lt;Hashes&gt;
+</code></pre><ul id="4339c060-1fdd-41c4-a5ec-20281aedaa12" class="bulleted-list"><li style="list-style-type:disc"><code>-wordlist=&lt;Wordlist&gt;</code>: Especifica la lista de palabras para la prueba.</li></ul><ul id="f54f6c52-3603-45a5-add6-4cc9578bcbe6" class="bulleted-list"><li style="list-style-type:disc"><code>&lt;Hashes&gt;</code>: Archivo que contiene los hashes a crackear.</li></ul></li></ol><ol type="1" id="c4e393c9-dfb3-4b52-be33-6ef7a9d7e6aa" class="numbered-list" start="2"><li><strong>Ataque por Fuerza Bruta:</strong><pre id="e24ab78d-18ff-45db-bf00-71654233e45b" class="code code-wrap"><code>john --incremental &lt;Hashes&gt;
+</code></pre><ul id="71856069-62d9-4055-b7e0-9c635f464cbb" class="bulleted-list"><li style="list-style-type:disc"><code>-incremental</code>: Realiza un ataque de fuerza bruta incremental.</li></ul></li></ol><ol type="1" id="715ea133-27d6-4212-b0e0-2b5a4044c895" class="numbered-list" start="3"><li><strong>Seleccionar Formato de Hash:</strong><pre id="791ff28e-b787-4ba2-8410-772e1c15b6ea" class="code code-wrap"><code>john --format=&lt;Formato&gt; &lt;Hashes&gt;
+</code></pre><ul id="d084e725-0aed-46cd-8a7a-f175397c7474" class="bulleted-list"><li style="list-style-type:disc"><code>-format=&lt;Formato&gt;</code>: Especifica el formato del hash.</li></ul></li></ol><ol type="1" id="628d6c22-8de1-40d9-b1b4-6946ee51969a" class="numbered-list" start="4"><li><strong>Crackear Contraseñas con Reglas (Rule-based):</strong><pre id="f19d046d-937f-4ba5-9ad4-13c44bb7a14b" class="code code-wrap"><code>john --wordlist=&lt;Wordlist&gt; --rules &lt;Hashes&gt;
+</code></pre><ul id="18d4e584-9fac-476b-9503-dbdac22e4395" class="bulleted-list"><li style="list-style-type:disc"><code>-rules</code>: Aplica reglas para generar variantes de palabras.</li></ul></li></ol><ol type="1" id="75fc8432-6698-4e05-bfab-fea476abed67" class="numbered-list" start="5"><li><strong>Mostrar Contraseñas Crackeadas:</strong><pre id="2d60eefd-6347-4923-8ff5-fc41007b9c23" class="code code-wrap"><code>john --show &lt;Hashes&gt;
+</code></pre><ul id="78fcd431-6cf3-43ae-9dce-e1eefd936678" class="bulleted-list"><li style="list-style-type:disc"><code>-show</code>: Muestra las contraseñas crackeadas.</li></ul></li></ol><ol type="1" id="c6ab18df-547b-4263-bfb8-433114ea8b05" class="numbered-list" start="6"><li><strong>Ataque Incremental con Longitud Específica:</strong><pre id="c2da38cb-f468-425e-98f1-162d60ccf294" class="code code-wrap"><code>john --incremental:&lt;Longitud&gt; &lt;Hashes&gt;
+</code></pre><ul id="485b465e-b098-4888-bdfd-f9552d9d50c5" class="bulleted-list"><li style="list-style-type:disc"><code>-incremental:&lt;Longitud&gt;</code>: Realiza un ataque de fuerza bruta incremental con contraseñas de una longitud específica.</li></ul></li></ol><ol type="1" id="5f15f49a-d307-48ee-917f-bc36b6c4434b" class="numbered-list" start="7"><li><strong>Utilizar Máquinas GPU (si está disponible):</strong><pre id="0e11a848-bc3c-4b1e-8a76-3f3e3ea4ae89" class="code code-wrap"><code>john --format=&lt;Formato&gt; --device=&lt;Número_GPU&gt; &lt;Hashes&gt;
+</code></pre><ul id="92f13fb2-1ed2-4b26-a3c8-c11f6f004d2b" class="bulleted-list"><li style="list-style-type:disc"><code>-device=&lt;Número_GPU&gt;</code>: Especifica la GPU a utilizar.</li></ul></li></ol><ol type="1" id="11718f5f-8fe1-405a-90ab-8e5310102905" class="numbered-list" start="8"><li><strong>Generar Hash para Contraseña:</strong><pre id="a571426b-27c8-4312-86de-6bd2df90014c" class="code code-wrap"><code>john --format=&lt;Formato&gt; --stdout &lt;Contraseña&gt;
+</code></pre><ul id="43e292ec-97a2-4277-963c-35212e7405df" class="bulleted-list"><li style="list-style-type:disc"><code>-stdout</code>: Muestra el hash de la contraseña proporcionada.</li></ul></li></ol><hr id="9850c1af-7ee9-4602-a3a9-76468ae3187f"/><hr id="fd985fcf-a70a-4251-8a46-a3838c73ab30"/><h2 id="fa214ff4-a59d-4917-a7bb-43d1916d915a" class="">Gobuster</h2><ol type="1" id="96d490c9-58b9-4a6a-82fd-9c8264fd3a83" class="numbered-list" start="1"><li><strong>Enumerar Directorios:</strong><pre id="551bb2ea-3270-4689-91cf-00466f410b0b" class="code code-wrap"><code>gobuster dir -u &lt;URL&gt; -w &lt;Wordlist&gt;
+</code></pre><ul id="40f1e622-8252-4232-923b-f5de6050abdd" class="bulleted-list"><li style="list-style-type:disc"><code>dir</code>: Indica el modo de búsqueda de directorios.</li></ul><ul id="f572e421-b434-47c3-8473-97cf0c9024c9" class="bulleted-list"><li style="list-style-type:disc"><code>u &lt;URL&gt;</code>: Especifica la URL objetivo.</li></ul><ul id="a634e5c1-25c5-4e1b-aff9-6678c71ed064" class="bulleted-list"><li style="list-style-type:disc"><code>w &lt;Wordlist&gt;</code>: Selecciona la lista de palabras para la búsqueda.</li></ul></li></ol><ol type="1" id="4b636e5c-074a-45da-8214-0c280c019004" class="numbered-list" start="2"><li><strong>Enumerar Subdominios:</strong><pre id="cafa809a-84fa-4230-8f44-03166ad29255" class="code code-wrap"><code>gobuster dns -d &lt;Dominio&gt; -w &lt;Wordlist&gt;
+</code></pre><ul id="25cd0380-30c2-477b-a5a6-8a4c28c088c2" class="bulleted-list"><li style="list-style-type:disc"><code>dns</code>: Modo de búsqueda de subdominios.</li></ul><ul id="76848016-6bfd-4493-b1e2-dc138bf0521b" class="bulleted-list"><li style="list-style-type:disc"><code>d &lt;Dominio&gt;</code>: Especifica el dominio objetivo.</li></ul></li></ol><ol type="1" id="2edcbe2b-917e-4bd7-a9bd-07c0669e0103" class="numbered-list" start="3"><li><strong>Búsqueda Recursiva de Directorios con Profundidad Específica:</strong><pre id="cba6c683-ff60-4035-b61e-11bb623b7f0e" class="code code-wrap"><code>gobuster dir -u &lt;URL&gt; -w &lt;Wordlist&gt; -t &lt;Número_Hilos&gt; -l -s &lt;Código_Estado&gt; -x &lt;Extensiones&gt; -r
+</code></pre><ul id="85e4ef3b-7409-4085-83ca-3ad472297922" class="bulleted-list"><li style="list-style-type:disc"><code>t &lt;Número_Hilos&gt;</code>: Especifica el número de hilos.</li></ul><ul id="2d1ae4d0-08fb-4ef7-8701-c24fca7da09c" class="bulleted-list"><li style="list-style-type:disc"><code>l</code>: Mostrar la longitud de la respuesta.</li></ul><ul id="0184ea20-a9a6-4646-a945-9365650051f4" class="bulleted-list"><li style="list-style-type:disc"><code>s &lt;Código_Estado&gt;</code>: Filtra por códigos de estado.</li></ul><ul id="aad9b1c8-81b9-4324-85fe-7f658c9e43c4" class="bulleted-list"><li style="list-style-type:disc"><code>x &lt;Extensiones&gt;</code>: Filtra por extensiones de archivo.</li></ul><ul id="f4afde85-dce2-4e4f-aea7-f4fab2dcafb0" class="bulleted-list"><li style="list-style-type:disc"><code>r</code>: Búsqueda recursiva de directorios.</li></ul></li></ol><ol type="1" id="4edd3bde-2f08-437f-9f91-028062ffa234" class="numbered-list" start="4"><li><strong>Búsqueda de Archivos con Extensiones Específicas:</strong><pre id="e1ac95e2-63dc-4c17-b655-32679f0a2db9" class="code code-wrap"><code>gobuster dir -u &lt;URL&gt; -w &lt;Wordlist&gt; -x &lt;Extensiones&gt;
+</code></pre><ul id="a74c465f-8777-4e59-8d43-84defcfb66b3" class="bulleted-list"><li style="list-style-type:disc"><code>x &lt;Extensiones&gt;</code>: Filtra por extensiones de archivo.</li></ul></li></ol><ol type="1" id="b8c6487f-b374-4dd2-9702-a0c30fc4f3e8" class="numbered-list" start="5"><li><strong>Búsqueda de Archivos o Directorios Ignorando Ciertos Códigos de Estado:</strong><pre id="c99a4128-8a21-483d-b7e3-c145441088b1" class="code code-wrap"><code>gobuster dir -u &lt;URL&gt; -w &lt;Wordlist&gt; -s &quot;404,403,301&quot;
+</code></pre><ul id="2e05f84d-c076-4ff4-b9cb-40ab663c97c2" class="bulleted-list"><li style="list-style-type:disc"><code>s &quot;404,403,301&quot;</code>: Ignora códigos de estado específicos.</li></ul></li></ol><hr id="9178b97e-a489-41f3-b7c3-4c6bddfc6080"/><hr id="f889c834-4e54-47b2-8ce6-3165235fed31"/><h2 id="8853ee2f-d24c-4d62-8438-7eee8c827d81" class="">wireshark</h2><h3 id="69f680df-9a7c-422e-8111-db2eeda64216" class="">1. <strong>Instalación:</strong></h3><ul id="c6a7c2cd-c81c-4fd2-9e5c-6493b9ae9ba8" class="bulleted-list"><li style="list-style-type:disc">Descarga e instala Wireshark desde el <a href="https://www.wireshark.org/">sitio web oficial</a>.</li></ul><ul id="5fa3a7fa-57ac-426d-b2f3-747abd097505" class="bulleted-list"><li style="list-style-type:disc">Durante la instalación, asegúrate de instalar los controladores de captura de WinPcap o Npcap (según la plataforma).</li></ul><h3 id="5d19afb0-0df7-4a93-9b67-c2307a4150f8" class="">2. <strong>Inicio de Wireshark:</strong></h3><ul id="9893fed4-83fa-4968-9565-1ef564b3d6b0" class="bulleted-list"><li style="list-style-type:disc">Abre Wireshark desde el menú de inicio o el acceso directo.</li></ul><h3 id="4a9c4452-0edc-4b83-9c5a-6b0e2889ae76" class="">3. <strong>Seleccionar Interfaz de Captura:</strong></h3><ul id="25446917-8216-4589-a67e-73c86eaa84ac" class="bulleted-list"><li style="list-style-type:disc">En la barra de herramientas, elige la interfaz de red que deseas monitorear y hacer clic en el botón &quot;Start&quot; (Inicio) para comenzar la captura.</li></ul><h3 id="f28ea35f-28e0-40b9-b50c-85de1cfcafa0" class="">4. <strong>Capturar Datos:</strong></h3><ul id="ae8bc620-4631-46e8-ae13-f508f412faef" class="bulleted-list"><li style="list-style-type:disc">Wireshark comenzará a capturar datos en tiempo real. Observa los paquetes que se muestran en la ventana principal.</li></ul><h3 id="7da73dab-076d-4d80-9093-9885b0624203" class="">5. <strong>Filtrar Datos:</strong></h3><ul id="35f59c90-9ab1-4830-b762-68c04411f454" class="bulleted-list"><li style="list-style-type:disc">Puedes aplicar filtros para visualizar solo los paquetes relevantes. Ingresa expresiones de filtrado en la barra de filtro (ejemplo: <code>ip.src == 192.168.1.1</code>).</li></ul><h3 id="23111ef6-9c7e-417f-a634-3b6ab9996a8c" class="">6. <strong>Detener la Captura:</strong></h3><ul id="3b07d0bd-d75f-4c47-91cb-28df77582d35" class="bulleted-list"><li style="list-style-type:disc">Para detener la captura, haz clic en el botón &quot;Stop&quot; (Detener) en la barra de herramientas.</li></ul><h3 id="c9a401f0-2055-4640-bbd4-19acf540e738" class="">7. <strong>Análisis de Paquetes:</strong></h3><ul id="7f665aea-a4a7-42c5-b6e9-cf11691808ae" class="bulleted-list"><li style="list-style-type:disc">Haz doble clic en un paquete para ver detalles como dirección MAC, dirección IP, protocolos, etc.</li></ul><ul id="cd80de8a-2249-4fbb-96e3-e1e683d71da6" class="bulleted-list"><li style="list-style-type:disc">La sección de &quot;Follow&quot; (Seguir) permite ver el flujo de datos.</li></ul><h3 id="d1e062c4-bcad-4159-95ff-aa55a7fa010a" class="">8. <strong>Guardar Capturas:</strong></h3><ul id="35dc1d2d-26ae-49fd-897f-69f8b90b0fe0" class="bulleted-list"><li style="list-style-type:disc">Puedes guardar las capturas en formato pcap para revisarlas más tarde o compartirlas con otros.</li></ul><h3 id="4a5dd9ce-c958-45ae-9de5-039b02d5ddfc" class="">9. <strong>Estadísticas Básicas:</strong></h3><ul id="6dd0f3a1-50e0-4214-b3b0-3cc24e821aa8" class="bulleted-list"><li style="list-style-type:disc">Accede a &quot;Statistics&quot; (Estadísticas) en la barra de menú para ver estadísticas básicas como resumen de protocolos, direcciones MAC, etc.</li></ul><h3 id="e9b5514d-1938-489e-ba3b-426335425dab" class="">10. <strong>Conversaciones:</strong></h3><ul id="f53aee90-2cb7-4f78-b0e7-e47b311bff72" class="bulleted-list"><li style="list-style-type:disc">La opción &quot;Statistics&quot; -&gt; &quot;Conversations&quot; (Estadísticas -&gt; Conversaciones) te permite ver las conversaciones por dirección IP, puerto, etc.</li></ul><h3 id="14ca0b84-189e-4e41-be08-c1f499e5cc3a" class="">11. <strong>Exportar Datos:</strong></h3><ul id="091cc4ed-3909-4e0d-80f3-3a5396343602" class="bulleted-list"><li style="list-style-type:disc">Wireshark permite exportar datos en varios formatos para un análisis más detallado.</li></ul><h3 id="7d5a587b-1c19-4129-9659-038b392de240" class="">12. <strong>Análisis de Flujo Seguro (SSL/TLS):</strong></h3><ul id="062754ee-a78e-4195-87db-21eaf24d95e4" class="bulleted-list"><li style="list-style-type:disc">Wireshark puede desencriptar el tráfico SSL/TLS si tienes las claves privadas correspondientes.</li></ul><h3 id="7604a6e7-ebdb-4a90-8ccf-bc7714f0eded" class="">13. <strong>Seguimiento de Streams:</strong></h3><ul id="f3927c4b-81e3-49f4-99a0-64f903b83d4a" class="bulleted-list"><li style="list-style-type:disc">Para analizar flujos de datos específicos, utiliza la función &quot;Follow&quot; (Seguir) para TCP, UDP, etc.</li></ul><h3 id="6cc6ad8f-fcb4-4c3d-bda1-7f8ae7e19dc1" class="">Notas Importantes:</h3><ul id="d65ad8ca-03e3-4510-8006-419dd57c64fb" class="bulleted-list"><li style="list-style-type:disc">Asegúrate de tener permisos adecuados para realizar capturas de red.</li></ul><ul id="3f3e5a2b-1862-4edf-aaca-f4802605f355" class="bulleted-list"><li style="list-style-type:disc">Wireshark muestra información sensible. Úsalo de manera ética y respetando la privacidad de los demás.</li></ul><hr id="46b64267-b491-4b9c-91af-6d3528ed99ba"/><hr id="4427438b-c52f-4057-8a34-4516dd177162"/><h2 id="d7347ad2-e33c-4bdf-b98c-ac074b781d40" class="">openvpn</h2><p id="97c3f5b3-a59e-4504-bad7-eb8868be5254" class="">Aquí tienes una guía técnica básica para usar OpenVPN. OpenVPN es una herramienta de código abierto que permite crear conexiones VPN seguras. A continuación, se describen los pasos básicos para configurar y utilizar OpenVPN:</p><h3 id="c43d97ed-e90f-41d4-8bd7-706e6f20636b" class="">Manual Técnico de OpenVPN</h3><h3 id="44111617-3c08-4320-9343-bf9e8e00ec6a" class="">1. <strong>Instalación:</strong></h3><ul id="631c50d8-0b7e-45c4-99c0-933456f224ef" class="bulleted-list"><li style="list-style-type:disc">Instala OpenVPN en tu sistema operativo. Puedes descargarlo desde el <a href="https://openvpn.net/community-downloads/">sitio web oficial de OpenVPN</a>.</li></ul><h3 id="0c0b56dc-06c5-4e12-9d7e-713da961f190" class="">2. <strong>Generación de Certificados:</strong></h3><ul id="ecbbee5c-bfd7-4419-9639-0a6b452a1fca" class="bulleted-list"><li style="list-style-type:disc">OpenVPN utiliza certificados para autenticar clientes y servidores. Puedes generar certificados utilizando la herramienta <code>easy-rsa</code> que generalmente viene con la instalación de OpenVPN.</li></ul><pre id="1e136b50-f666-4873-9355-d1a2251c4865" class="code code-wrap"><code>bash
+</code></pre><pre id="81dced7a-8b28-4964-b548-54b99905144c" class="code code-wrap"><code>cd /path/to/easy-rsa
+source vars
+./clean-all
+./build-ca
+./build-key-server &lt;nombre-servidor&gt;
+./build-key &lt;nombre-cliente&gt;
+./build-dh
+
+</code></pre><h3 id="f29efd53-337d-43c2-ab87-eda03feb618d" class="">3. <strong>Configuración del Servidor:</strong></h3><ul id="99716cba-5a06-480f-886a-86cbfce97d38" class="bulleted-list"><li style="list-style-type:disc">Crea un archivo de configuración para el servidor OpenVPN (por ejemplo, <code>server.conf</code>). Aquí hay un ejemplo básico:</li></ul><pre id="7b198d86-782f-45e6-863e-9fd0fbcb6a6c" class="code code-wrap"><code>conf
+</code></pre><pre id="30c5d045-e065-426b-adbf-536c4ec2004a" class="code code-wrap"><code>port 1194
+proto udp
+dev tun
+ca ca.crt
+cert &lt;nombre-servidor&gt;.crt
+key &lt;nombre-servidor&gt;.key
+dh dh2048.pem
+server 10.8.0.0 255.255.255.0
+push &quot;redirect-gateway def1&quot;
+push &quot;dhcp-option DNS 8.8.8.8&quot;
+
+</code></pre><h3 id="09479a54-8da2-4921-a565-aaf3638d5297" class="">4. <strong>Iniciar el Servidor:</strong></h3><ul id="6eac03e6-894e-456d-bce1-616d42c19bc9" class="bulleted-list"><li style="list-style-type:disc">Ejecuta OpenVPN con la configuración del servidor:</li></ul><pre id="8b49e095-c4cb-45ad-a347-d82f6e06659b" class="code code-wrap"><code>bash
+</code></pre><pre id="a4c205ba-38a3-4a04-aaf9-b89a16fbd2ff" class="code code-wrap"><code>openvpn --config server.conf
+
+</code></pre><h3 id="2aab4923-9e72-473d-8b33-434f1d2119f9" class="">5. <strong>Configuración del Cliente:</strong></h3><ul id="ef119e45-1ce7-4d63-9d20-9c189803bdf2" class="bulleted-list"><li style="list-style-type:disc">Crea un archivo de configuración para el cliente OpenVPN (por ejemplo, <code>client.ovpn</code>). Aquí hay un ejemplo básico:</li></ul><pre id="30b2c562-2f45-4be7-8122-1eb56cc00939" class="code code-wrap"><code>conf
+</code></pre><pre id="daa21d76-d8f3-4844-b0e6-6dd8180f9365" class="code code-wrap"><code>client
+dev tun
+proto udp
+remote &lt;ip-servidor&gt; 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca ca.crt
+cert &lt;nombre-cliente&gt;.crt
+key &lt;nombre-cliente&gt;.key
+
+</code></pre><h3 id="8d8cc911-7240-4831-b38f-2e9fe1f0e8a6" class="">6. <strong>Conectar el Cliente:</strong></h3><ul id="d34d4ba8-094c-4476-9838-f3b679643ab1" class="bulleted-list"><li style="list-style-type:disc">Ejecuta OpenVPN en el cliente con la configuración del cliente:</li></ul><pre id="fe4744ce-1816-4325-b492-13244edc78c5" class="code code-wrap"><code>bash
+</code></pre><pre id="36a186b3-2e35-4a59-8413-56045598822f" class="code code-wrap"><code>openvpn --config client.ovpn
+
+</code></pre><h3 id="41525306-a30e-4331-95fe-f67160bbcd77" class="">7. <strong>Verificar la Conexión:</strong></h3><ul id="3679b507-5fee-414d-9ccd-26f8de601911" class="bulleted-list"><li style="list-style-type:disc">Una vez conectado, verifica la conexión a través de comandos como <code>ip a</code> o <code>ifconfig</code> para ver si la interfaz <code>tun</code> se ha creado.</li></ul><h3 id="3d363c7a-0caf-4380-813b-2a5ffea6aa39" class="">8. <strong>Detener el Servidor/Cliente:</strong></h3><ul id="14a329e0-003a-4ef4-9463-437ba7d6a5e0" class="bulleted-list"><li style="list-style-type:disc">Para detener el servidor o cliente, simplemente presiona <code>Ctrl+C</code> en la terminal donde se está ejecutando OpenVPN.</li></ul><h3 id="796615dc-cfac-400d-ad02-2cd0cbfe853f" class="">Notas Importantes:</h3><ul id="0e52ec44-366f-4beb-b900-8bb9787be77c" class="bulleted-list"><li style="list-style-type:disc">Asegúrate de tener permisos adecuados para acceder a los archivos de configuración y certificados.</li></ul><ul id="232457c0-6eb8-4de6-b532-abe242b716b8" class="bulleted-list"><li style="list-style-type:disc">Los certificados y claves son esenciales para la seguridad; guárdalos en un lugar seguro.</li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
