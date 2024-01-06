@@ -1,0 +1,1218 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Scripting en Bash</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8cfa4f2e-cab1-4858-8e19-5e419b61c980" class="page mono"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/command-line_gray.svg"/></div><h1 class="page-title">Scripting en Bash</h1><p class="page-description"></p></header><div class="page-body"><h1 id="0aa94453-4503-4437-b242-55291ca504b5" class="">Archivos de Bash</h1><p id="50fe7888-749f-4067-8fb1-bfa7fb955779" class="">Guardar y ejecutar archivos en Bash es un proceso bastante simple. Aquí hay una guía paso a paso:</p><h3 id="daf341f1-6ca8-4228-8bfb-427406608ad7" class="">Guardar un Archivo en Bash:</h3><ol type="1" id="91ad7d9b-22e4-4e77-8190-3a1e81222482" class="numbered-list" start="1"><li><strong>Abre un Editor de Texto:</strong><ul id="a7ffa6ad-062f-42b1-995e-5cf1ff6eb524" class="bulleted-list"><li style="list-style-type:disc">Utiliza tu editor de texto favorito. Puedes usar nano, vim, gedit, o cualquier otro que prefieras.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="99d04f67-f75b-4c8f-9a9f-da943d5ae2d3" class="code code-wrap"><code class="language-Shell">nano mi_script.sh   # Utiliza &quot;nano&quot; como ejemplo, puedes usar el editor que prefieras
+</code></pre></li></ol><ol type="1" id="32bc8df1-dbbd-4c4d-8db8-8d325f94ae44" class="numbered-list" start="2"><li><strong>Escribe tu Script:</strong><ul id="bd4a79e5-3b6b-4b8a-a4bd-33b7f2c108b6" class="bulleted-list"><li style="list-style-type:disc">Escribe tu código Bash en el editor. Por ejemplo:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ce83ada-53a0-4e57-a573-4f11c5fc0173" class="code code-wrap"><code class="language-Shell"># mi_script.sh
+echo &quot;Hola, mundo!&quot;
+</code></pre></li></ol><ol type="1" id="e98b5b99-ed0a-457b-bf8d-a76ea61c6fad" class="numbered-list" start="3"><li><strong>Guarda el Archivo:</strong><ul id="a46d70a2-2378-4ae5-8146-64cb1203961c" class="bulleted-list"><li style="list-style-type:disc">Guarda el archivo con el nombre que desees y con la extensión <code>.sh</code> para indicar que es un script de shell.</li></ul></li></ol><ol type="1" id="84e9d2ca-a271-44a5-bcd6-627106df5daf" class="numbered-list" start="4"><li><strong>Otorga Permisos de Ejecución (Opcional):</strong><ul id="578a160f-b986-4cbe-bd43-464d9fa7ccde" class="bulleted-list"><li style="list-style-type:disc">Si no tienes permisos de ejecución, otórgalos al archivo.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="474c1f75-5fdf-4875-98da-442ce2e4fe5b" class="code code-wrap"><code class="language-Shell">chmod +x mi_script.sh
+</code></pre></li></ol><h3 id="adaf59d6-4c96-43c2-a67c-14f18f7919fe" class="">Ejecutar un Archivo en Bash:</h3><ol type="1" id="69573b61-a36d-4a84-9306-e46f94173ebb" class="numbered-list" start="1"><li><strong>Navega a la Carpeta del Archivo:</strong><ul id="5550071e-48f7-463d-9f25-000435312132" class="bulleted-list"><li style="list-style-type:disc">Abre una terminal y navega al directorio donde se encuentra tu archivo.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a984bc58-3fd6-49be-9887-335d24d1f9bf" class="code code-wrap"><code class="language-Shell">cd ruta/del/archivo
+</code></pre></li></ol><ol type="1" id="042f3d1f-ee4d-43e4-973c-5c4df123dad4" class="numbered-list" start="2"><li><strong>Ejecuta el Archivo:</strong><ul id="630695ae-191d-4b96-b913-898a977f9cb3" class="bulleted-list"><li style="list-style-type:disc">Puedes ejecutar el archivo directamente.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f0395c2d-1d5a-4c07-b568-e7b977ad4ea2" class="code code-wrap"><code class="language-Shell">./mi_script.sh
+</code></pre><p id="810f14f5-090b-4a59-beb3-0db173755f18" class="">O si no otorgaste permisos de ejecución:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="66916856-9e7e-4d1b-ac24-6fb4528dae3e" class="code code-wrap"><code class="language-Shell">bash mi_script.sh
+</code></pre><p id="856cf193-0fba-4caa-8593-95a6a8915860" class="">También puedes especificar el intérprete directamente en la primera línea del script:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6abcac78-700e-428b-9e0e-7ad4a3fb0c01" class="code code-wrap"><code class="language-Shell">#!/bin/bash
+echo &quot;Hola, mundo!&quot;
+</code></pre><p id="8a06f2ee-9c56-443b-8e5a-f7aedc18eaef" class="">Después otorga permisos y ejecuta:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="aafa9663-b8e9-44d4-850b-b3c4912d9597" class="code code-wrap"><code class="language-Shell">chmod +x mi_script.sh
+./mi_script.sh
+</code></pre></li></ol><hr id="b5ab9283-e336-4acc-8959-d3d0df056bf7"/><h1 id="136e2eb7-ab14-4311-8dc8-567669491d86" class="">Scripting en Bash</h1><p id="5989ee04-f75c-4edf-87b9-dae5f226ec0c" class="">El scripting en Bash se refiere a la creación de scripts (archivos de texto con comandos) que son ejecutados por el intérprete de Bash.</p><h3 id="c2e9c8ea-1302-4d7c-8f69-185df174f4f5" class="">1. <strong>Shebang (#!):</strong></h3><p id="59fb2215-baef-4688-888b-ddae0989824d" class="">Al inicio del script, agrega la línea <code>#!/bin/bash</code>. Esto indica que el script debe ser interpretado por Bash. Por ejemplo:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c00fade1-c4e8-408b-b7bd-d73a5785435f" class="code code-wrap"><code class="language-Shell">#!/bin/bash
+</code></pre><h3 id="7a6e2fbb-397a-4d52-b348-c89588ca82bb" class="">2. <strong>Comentarios:</strong></h3><p id="373d721b-9136-477f-969f-6908ef85903e" class="">Usa <code>#</code> para comentarios. Los comentarios son ignorados por el intérprete de Bash y son útiles para documentar tu script.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="666c1fc7-dcb5-460d-b9a0-a967ddaecddc" class="code code-wrap"><code class="language-Shell"># Esto es un comentario
+</code></pre><h3 id="05b62992-ca25-4308-bacf-ae3aa6dde2eb" class="">3. <strong>Variables:</strong></h3><p id="2acd8f69-b2a5-44f4-a651-b84fa8317a49" class="">Las variables se crean sin espacios alrededor del signo igual. Se recomienda usar nombres de variables en mayúsculas.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="44b4e44d-bf1a-4ff9-92c5-6ab54b5b22e4" class="code code-wrap"><code class="language-Shell">MI_VARIABLE=&quot;Hola, mundo&quot;
+</code></pre><h3 id="4404443f-190b-47fa-bad7-b686f9a4d457" class="">4. <strong>Entrada de Usuario:</strong></h3><p id="9c017421-076b-4ecf-97bb-bed1d8611650" class="">Para obtener entrada del usuario, puedes usar el comando <code>read</code>.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="a7f671e2-90d9-4a64-b478-089a8c211498" class="code code-wrap"><code class="language-Shell">echo &quot;¿Cuál es tu nombre?&quot;
+read NOMBRE
+echo &quot;Hola, $NOMBRE&quot;
+</code></pre><h3 id="3af7fb11-514a-4d80-9e97-811b1e58f71a" class="">5. <strong>Condicionales:</strong></h3><p id="75c84dbb-495f-49bd-800d-bed582765fc4" class="">Los condicionales en Bash son similares a otros lenguajes.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="742ed402-62db-49c4-aed7-82273b67d900" class="code code-wrap"><code class="language-Shell">if [ $EDAD -ge 18 ]; then
+  echo &quot;Eres mayor de edad.&quot;
+else
+  echo &quot;Eres menor de edad.&quot;
+fi
+</code></pre><h3 id="7129d268-40de-4efa-b8f9-2992a71b836c" class="">6. <strong>Bucles:</strong></h3><p id="2a5aeb56-c85e-4d13-a2dd-e6a2f0a44afc" class="">Los bucles <code>for</code> y <code>while</code> son comunes en scripts Bash.</p><h3 id="8a1ed82c-6e90-482b-ab70-f319ba1c1d24" class="">Bucle <code>for</code>:</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b9a2d5a0-fc50-47ab-8ca7-2f37f6b77807" class="code code-wrap"><code class="language-Shell">for i in {1..5}; do
+  echo $i
+done
+</code></pre><h3 id="f87aa617-bb1e-44cb-9c79-7d5ec3216b2d" class="">Bucle <code>while</code>:</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5665fae8-d3d8-408b-ac1f-c57b2017e650" class="code code-wrap"><code class="language-Shell">CONTADOR=0
+while [ $CONTADOR -lt 5 ]; do
+  echo $CONTADOR
+  ((CONTADOR++))
+done
+</code></pre><h3 id="d4e4920f-10ee-417d-9710-81dcd3e4f8eb" class="">7. <strong>Funciones:</strong></h3><p id="024a5c06-77b9-48cb-bc39-5f4982f48ed1" class="">Las funciones te permiten dividir tu script en bloques lógicos.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2d4f2798-565f-436b-a648-87fda01bb936" class="code code-wrap"><code class="language-Shell">function saludar {
+  echo &quot;Hola, $1&quot;
+}
+
+saludar &quot;Juan&quot;
+</code></pre><h3 id="9013ac9e-3e39-4bb8-8f29-b4a931a4a5ce" class="">8. <strong>Ejecución de Comandos:</strong></h3><p id="77cf3a21-d263-4bd7-8989-9fa09fa269b3" class="">Puedes ejecutar comandos y almacenar el resultado en una variable.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9423e653-7761-4331-845e-14347293ca44" class="code code-wrap"><code class="language-Shell">FECHA=$(date)
+echo &quot;La fecha actual es: $FECHA&quot;
+</code></pre><h3 id="99dd4652-a014-4ca7-8dc3-a71716a699dc" class="">9. <strong>Parámetros del Script:</strong></h3><p id="4da30c33-1d4c-4795-ab03-5a6681452c22" class="">Puedes pasar parámetros a tu script.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9a54a3c0-eb1a-4523-8958-65b9c41914ee" class="code code-wrap"><code class="language-Shell">#!/bin/bash
+
+echo &quot;El primer parámetro es: $1&quot;
+echo &quot;El segundo parámetro es: $2&quot;
+</code></pre><h3 id="a4e97b81-ad09-4de9-a5a8-cbde731ce5ed" class="">10. <strong>Redirección y Tuberías:</strong></h3><p id="618063e0-b827-4d23-9c38-e0f3b7d7301c" class="">Puedes redirigir la salida de un comando o unir varios comandos con tuberías.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c12b19ab-3f92-4421-9442-d162f9022b3a" class="code code-wrap"><code class="language-Shell">ls &gt; archivos.txt
+cat archivos.txt | grep &quot;documento&quot;
+</code></pre><h3 id="43412506-ec18-4df9-82b3-02a1e4393f39" class="">11. <strong>Manejo de Errores:</strong></h3><p id="585d7373-195c-4148-8d1b-9be849c46b0c" class="">Puedes usar el comando <code>trap</code> para manejar señales y errores.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cd8d8090-55ee-4b75-8bfe-9c96d0906c8c" class="code code-wrap"><code class="language-Shell">trap &#x27;echo &quot;Error en la ejecución&quot; &amp;&amp; exit 1&#x27; ERR
+</code></pre><h3 id="accf1bb6-2ff3-44ba-833c-75aa4d6af190" class="">12. <strong>Arrays:</strong></h3><p id="865fa76b-f9ee-4d6c-9801-9972dbcfb390" class="">Bash también permite el uso de matrices.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7df8f74c-1915-458b-957e-6b66b7b43a90" class="code code-wrap"><code class="language-Shell">FRUTAS=(&quot;Manzana&quot; &quot;Banana&quot; &quot;Naranja&quot;)
+echo ${FRUTAS[1]}  # Muestra &quot;Banana&quot;
+</code></pre><h3 id="ae246039-effd-4b5a-a444-87aa699edcad" class="">13. <strong>Expresiones Aritméticas:</strong></h3><p id="07233ba4-5651-4756-8445-9fc36f3c5c7f" class="">Puedes realizar operaciones matemáticas utilizando la doble paréntesis <code>(( ))</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="50fb3fec-8159-4566-a4e0-9db447b0bbdc" class="code code-wrap"><code class="language-Shell">NUM1=5
+NUM2=3
+RESULTADO=$((NUM1 + NUM2))
+echo &quot;La suma es: $RESULTADO&quot;
+</code></pre><h3 id="3d139b30-569e-4049-9583-f33f8b3d1c86" class="">14. <strong>Cadenas y Longitud de Cadenas:</strong></h3><p id="da5160b1-a88f-4484-b883-082ea115c4d2" class="">Manipula cadenas de texto y obtén la longitud de una cadena:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="64471709-90e5-4f06-a83d-f03e193f0169" class="code code-wrap"><code class="language-Shell">CADENA=&quot;Hola, mundo&quot;
+echo ${#CADENA}   # Muestra la longitud de la cadena
+echo ${CADENA:6}  # Muestra &quot;mundo&quot;
+</code></pre><h3 id="814b301c-dc02-47fa-9d3d-889719869a10" class="">15. <strong>Case Statement:</strong></h3><p id="a116bcb4-99f7-4df7-8575-adb86d0447b2" class="">Estructura de control de casos:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="023a664f-526b-46f4-8233-28f9b32682ad" class="code code-wrap"><code class="language-Shell">FRUTA=&quot;Manzana&quot;
+case $FRUTA in
+  &quot;Manzana&quot;) echo &quot;Es una manzana.&quot; ;;
+  &quot;Banana&quot;) echo &quot;Es una banana.&quot; ;;
+  *) echo &quot;No es ni manzana ni banana.&quot; ;;
+esac
+</code></pre><h3 id="56eaed13-be22-4b3f-88ea-823adbae8678" class="">16. <strong>Operadores Lógicos:</strong></h3><p id="ebcaafd7-3fbc-4157-a9d0-99250d1c1d92" class="">Utiliza operadores lógicos para combinar expresiones:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f31c51f7-b213-4efb-9249-98ad8b60792e" class="code code-wrap"><code class="language-Shell">EDAD=25
+if [ $EDAD -gt 18 ] &amp;&amp; [ $EDAD -lt 30 ]; then
+  echo &quot;Eres un adulto joven.&quot;
+fi
+</code></pre><h3 id="42b87069-61fa-4ce2-826f-e11c19b893c5" class="">17. <strong>Leer Archivos:</strong></h3><p id="caaed677-9020-413c-acfa-cc13fbbc42c1" class="">Lee archivos línea por línea:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b3ce755c-53d5-487a-82be-d3df11edd69c" class="code code-wrap"><code class="language-Shell">while IFS= read -r LINEA; do
+  echo &quot;Línea: $LINEA&quot;
+done &lt; archivo.txt
+</code></pre><h3 id="12fd4cbb-1872-4ee8-a04d-cfc09920e4e4" class="">18. <strong>Variables de Entorno:</strong></h3><p id="e664b88b-b70f-4a26-8d2e-34587f9aa1b7" class="">Accede y define variables de entorno:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0e9b00fb-6b07-49c8-a6b1-31d8e7ff6fe6" class="code code-wrap"><code class="language-Shell">echo &quot;El directorio actual es: $PWD&quot;
+export MI_VARIABLE=&quot;Valor&quot;
+</code></pre><h3 id="26ae6a7e-b3d7-4c2f-a5f0-d9b8bbbb1b6b" class="">19. <strong>Archivos y Directorios:</strong></h3><p id="c5e48278-e362-457e-93eb-ebf9164e9e63" class="">Verifica la existencia de archivos o directorios:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d8de3bb1-fb55-400e-94e0-349641736670" class="code code-wrap"><code class="language-Shell">if [ -e archivo.txt ]; then
+  echo &quot;El archivo existe.&quot;
+fi
+
+if [ -d directorio ]; then
+  echo &quot;El directorio existe.&quot;
+fi
+</code></pre><h3 id="722d52fe-2b20-4d11-9769-0723e0d70567" class="">20. <strong>Funciones Avanzadas:</strong></h3><p id="b701f2db-f05d-4a83-84e0-3bcef3ea1e18" class="">Retorno de valores y parámetros por referencia:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9c98e8c1-d971-42a9-94d6-edef90623f9b" class="code code-wrap"><code class="language-Shell">function suma {
+  local RESULTADO=$(( $1 + $2 ))
+  echo $RESULTADO
+}
+
+resultado=$(suma 3 4)
+echo &quot;La suma es: $resultado&quot;
+</code></pre><h3 id="32caacf2-a7fb-4b9d-81f3-d9bff4009349" class="">21. <strong>Debugging:</strong></h3><p id="f18cc509-7a6c-4c47-bce2-5bf35c0b3350" class="">Habilita la opción de debugging para rastrear errores:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c6f56526-3fee-4bfc-b0fd-a696dbec1e73" class="code code-wrap"><code class="language-Shell">#!/bin/bash
+set -x  # Activa el modo debugging
+# Resto del script
+set +x  # Desactiva el modo debugging
+</code></pre><h3 id="8ef0d521-dfa0-488e-b13a-86b86a205d31" class="">22. <strong>Expansión de Comandos:</strong></h3><p id="9761db0f-1815-468b-b41f-8f2412dcac4a" class="">Puedes ejecutar comandos dentro de una cadena y almacenar el resultado en una variable:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5c085620-65c6-4a50-b915-e247c47340de" class="code code-wrap"><code class="language-Shell">FECHA=$(date +%Y-%m-%d)
+echo &quot;Hoy es $FECHA&quot;
+</code></pre><h3 id="b47b2fd3-508e-4915-a672-c17a1e38d2bf" class="">23. <strong>Expresiones Regulares:</strong></h3><p id="e525062c-870c-48a1-ad3a-34bd54004342" class="">Puedes utilizar expresiones regulares para realizar coincidencias:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="59db6172-4b4f-4597-8f6f-61f79d62b4d7" class="code code-wrap"><code class="language-Shell">if [[ &quot;$NOMBRE&quot; =~ ^[A-Za-z]+$ ]]; then
+  echo &quot;El nombre es válido.&quot;
+else
+  echo &quot;El nombre no es válido.&quot;
+fi
+</code></pre><h3 id="63781ad9-db32-49d6-baec-a4d8b6e5b7f9" class="">24. <strong>Subshells:</strong></h3><p id="20307566-f6a7-4d30-82aa-78386fb7e45a" class="">Puedes ejecutar comandos en un subshell, lo que significa que las variables locales no afectan al script principal:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="bf7ebe01-18c9-4d6c-98e8-b4a5e0b9e13e" class="code code-wrap"><code class="language-Shell">(
+  VARIABLE=&quot;Valor en subshell&quot;
+  echo $VARIABLE
+)
+echo $VARIABLE  # Esto no afecta al valor de la variable en el subshell
+</code></pre><h3 id="c191b5c5-b717-41af-ad61-266f4c345d93" class="">25. <strong>Redirección avanzada:</strong></h3><p id="eb3ac580-938e-4f19-902e-26e88e214fb1" class="">Además de la redirección estándar (<code>&gt;</code>, <code>&lt;</code>), puedes redirigir la entrada y salida de comandos:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="dbeedc8c-f0eb-4c49-a9f2-5fb82e1c61b1" class="code code-wrap"><code class="language-Shell">comando1 2&gt;&amp;1 | comando2  # Combina la salida estándar y el error estándar
+</code></pre><h3 id="5198bdad-e866-4b24-a8a4-61954f6bcb10" class="">26. <strong>Manejo de Archivos y Streams:</strong></h3><p id="a145ab6b-fb7a-493f-a9e0-17b565f1b936" class="">Manipula archivos y streams con comandos como <code>grep</code>, <code>sed</code> y <code>awk</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cd3a2fc1-babd-49b7-95e8-e8992de9bde1" class="code code-wrap"><code class="language-Shell">cat archivo.txt | grep &quot;patrón&quot; | sed &#x27;s/buscar/reemplazar/&#x27; | awk &#x27;{print $2}&#x27;
+</code></pre><h3 id="37e08644-c276-44dd-be43-f905fcccf8c5" class="">27. <strong>Funciones Recursivas:</strong></h3><p id="5707d20c-5cee-4887-8d7a-355dff305861" class="">Bash admite funciones recursivas:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="08f54f31-f505-4626-82dc-cb1fa0b87217" class="code code-wrap"><code class="language-Shell">factorial() {
+  if [ $1 -eq 0 ]; then
+    echo 1
+  else
+    echo $(( $1 * $(factorial $(( $1 - 1 ))) ))
+  fi
+}
+
+resultado=$(factorial 5)
+echo &quot;El factorial de 5 es $resultado&quot;
+</code></pre><h3 id="03543969-0085-47e4-a704-cc32cc35044e" class="">28. <strong>Manipulación de Arrays:</strong></h3><p id="02f79d7f-fc28-4fc7-a11c-a790cbd4b724" class="">Bash permite la manipulación avanzada de matrices:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c6727f28-06cf-4962-9bfc-41d64d300c30" class="code code-wrap"><code class="language-Shell">MI_ARRAY=(elemento1 elemento2 elemento3)
+echo &quot;Número de elementos en el array: ${#MI_ARRAY[@]}&quot;
+echo &quot;Elementos del array: ${MI_ARRAY[@]}&quot;
+</code></pre><h3 id="75e1ee75-8e01-47ca-9797-765516231618" class="">29. <strong>Traps de Señales:</strong></h3><p id="6b4a90e0-acd8-4fb2-86f6-49a093c1d6ac" class="">Usa <code>trap</code> para capturar señales y manejarlas en tu script:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="358ddfb3-178d-4662-9dd5-0cceb7fe8b27" class="code code-wrap"><code class="language-Shell">trap &#x27;echo &quot;Se recibió una señal de interrupción.&quot; &amp;&amp; exit 1&#x27; INT
+</code></pre><h3 id="769fbb9d-9e6a-45cc-9e71-acc60612f111" class="">30. <strong>Operaciones de Bitwise:</strong></h3><p id="9475cbbc-0268-4f3b-88ae-8c429a3dc3ca" class="">Bash admite operaciones de bits:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="be1dddc1-e776-4e1d-803a-11add1577367" class="code code-wrap"><code class="language-Shell">NUM1=5
+NUM2=3
+RESULTADO=$((NUM1 &amp; NUM2))
+echo &quot;El resultado de la operación AND bitwise es $RESULTADO&quot;
+</code></pre><h3 id="5869d071-87e4-4ef1-88b1-2b5ab4543cd8" class="">31. <strong>Manipulación de Fechas:</strong></h3><p id="43e39abe-c596-45b5-b5af-f3b82778647d" class="">Utiliza el comando <code>date</code> para manipular fechas y tiempos:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e407786e-fd9a-4f5b-b558-5d9a27844730" class="code code-wrap"><code class="language-Shell">FECHA_ACTUAL=$(date +&quot;%Y-%m-%d %H:%M:%S&quot;)
+echo &quot;La fecha y hora actual es: $FECHA_ACTUAL&quot;
+</code></pre><h3 id="c8867d42-9ada-4918-b9b0-b52467098978" class="">32. <strong>Arrays Asociativos:</strong></h3><p id="076ca2c0-2238-46d2-b1e5-1f112ed7d9c7" class="">A partir de Bash 4, puedes usar arrays asociativos para asignar valores a claves:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6e84da9f-7e64-492b-b047-04a3bf344cc9" class="code code-wrap"><code class="language-Shell">declare -A ASOCIATIVO
+ASOCIATIVO[&quot;nombre&quot;]=&quot;Juan&quot;
+ASOCIATIVO[&quot;edad&quot;]=25
+echo &quot;Nombre: ${ASOCIATIVO[&quot;nombre&quot;]}, Edad: ${ASOCIATIVO[&quot;edad&quot;]}&quot;
+</code></pre><h3 id="f9b1b944-9cdd-4c6c-bb98-526158c3daf8" class="">33. <strong>Evaluación Perezosa:</strong></h3><p id="b125ff03-e4ef-4527-a420-ddad7c748355" class="">Puedes utilizar el operador <code>&amp;&amp;</code> para ejecutar un comando solo si el comando anterior tuvo éxito:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c67fc319-b05d-49e6-9616-05b097f1ba32" class="code code-wrap"><code class="language-Shell">comando1 &amp;&amp; echo &quot;El comando 1 tuvo éxito&quot; || echo &quot;El comando 1 falló&quot;
+</code></pre><h3 id="e759fabc-7678-4317-8cee-49e0696ebec7" class="">34. <strong>Manejo de Opciones con </strong><code><strong>getopts</strong></code><strong>:</strong></h3><p id="1c2969ad-46de-4b07-8d0c-f1171d86a840" class="">Para manejar opciones de línea de comandos de manera eficiente:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ae74b84a-7aed-4147-bac9-f141f5820866" class="code code-wrap"><code class="language-Shell">while getopts &quot;:abc:&quot; OPCION; do
+  case $OPCION in
+    a) echo &quot;Opción a&quot;;;
+    b) echo &quot;Opción b&quot;;;
+    c) echo &quot;Opción c con valor: $OPTARG&quot;;;
+    \\?) echo &quot;Opción inválida: -$OPTARG&quot;;;
+  esac
+done
+</code></pre><h3 id="cfd623ae-bc06-4f23-aa87-07c51f29f591" class="">35. <strong>Programación Orientada a Objetos:</strong></h3><p id="dcd5adeb-d0a7-4c4e-9128-26f7deac76c8" class="">Aunque Bash no es un lenguaje orientado a objetos, puedes simular objetos y métodos:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5f9a5c69-7275-42b9-a98f-7a7d749571f9" class="code code-wrap"><code class="language-Shell"># Definición de objeto
+Persona() {
+  nombre=&quot;$1&quot;
+  edad=&quot;$2&quot;
+}
+
+# Método de objeto
+saludar() {
+  echo &quot;Hola, soy $nombre y tengo $edad años.&quot;
+}
+
+# Uso del objeto
+persona1=$(Persona &quot;Juan&quot; 30)
+saludar &quot;$persona1&quot;
+</code></pre><h3 id="013e94b0-89a7-45c7-b5e8-e88a4516131d" class="">36. <strong>Manipulación de Cadenas con </strong><code><strong>sed</strong></code><strong> y </strong><code><strong>awk</strong></code><strong>:</strong></h3><p id="14ea753e-71d6-4c63-9fea-6def886a8788" class="">Utiliza <code>sed</code> y <code>awk</code> para manipular y procesar cadenas de texto:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="c5a227d3-6096-424b-af23-aa62d7d7f364" class="code code-wrap"><code class="language-Shell">echo &quot;Hola, mundo&quot; | sed &#x27;s/mundo/marte/&#x27;
+echo &quot;Juan 25&quot; | awk &#x27;{print $1}&#x27;  # Muestra &quot;Juan&quot;
+</code></pre><h3 id="ab83c58c-d9de-4f7c-9469-ba7dbce28cf8" class="">37. <strong>Generación de Números Aleatorios:</strong></h3><p id="ea666d84-ccfd-4e56-9c80-e2547727ba22" class="">Genera números aleatorios con <code>$RANDOM</code> o <code>shuf</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="14739587-25fa-481f-834a-6a352687a64d" class="code code-wrap"><code class="language-Shell">NUMERO=$((RANDOM % 100))
+echo &quot;Número aleatorio: $NUMERO&quot;
+
+NUMERO=$(shuf -i 1-100 -n 1)
+echo &quot;Número aleatorio: $NUMERO&quot;
+</code></pre><h3 id="3f16d525-7f49-456e-9d39-046cf0b7aea4" class="">38. <strong>Programación Funcional con </strong><code><strong>map</strong></code><strong> y </strong><code><strong>filter</strong></code><strong>:</strong></h3><p id="86409819-4536-4ca3-b249-1198c40b158c" class="">Aunque Bash no tiene funciones incorporadas como <code>map</code> y <code>filter</code>, puedes emular su comportamiento:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3193a9e4-f85c-47ec-8aea-a8fe888663d4" class="code code-wrap"><code class="language-Shell"># Función map
+map() {
+  local FUN=&quot;$1&quot;
+  shift
+  for ELEM in &quot;$@&quot;; do
+    $FUN &quot;$ELEM&quot;
+  done
+}
+
+# Función filter
+filter() {
+  local FUN=&quot;$1&quot;
+  shift
+  for ELEM in &quot;$@&quot;; do
+    if $FUN &quot;$ELEM&quot;; then
+      echo &quot;$ELEM&quot;
+    fi
+  done
+}
+
+# Uso de map y filter
+doble() {
+  echo $(($1 * 2))
+}
+
+es_par() {
+  [ $(($1 % 2)) -eq 0 ]
+}
+
+NUMEROS=(1 2 3 4 5)
+DOBLE_NUMEROS=($(map doble &quot;${NUMEROS[@]}&quot;))
+PARES=($(filter es_par &quot;${NUMEROS[@]}&quot;))
+</code></pre><h3 id="021154a4-72ba-4564-bcdd-f3773949929e" class="">39. <strong>Uso de </strong><code><strong>select</strong></code><strong> para Menús Interactivos:</strong></h3><p id="341300a5-96ed-4f34-a9b1-aeeffb57d262" class="">Crea menús interactivos con <code>select</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ad52ceb2-56d6-4351-be24-8ca4a19caaa5" class="code code-wrap"><code class="language-Shell">opciones=(&quot;Opción 1&quot; &quot;Opción 2&quot; &quot;Opción 3&quot; &quot;Salir&quot;)
+select opcion in &quot;${opciones[@]}&quot;; do
+  case $opcion in
+    &quot;Opción 1&quot;) echo &quot;Seleccionaste la Opción 1&quot;;;
+    &quot;Opción 2&quot;) echo &quot;Seleccionaste la Opción 2&quot;;;
+    &quot;Opción 3&quot;) echo &quot;Seleccionaste la Opción 3&quot;;;
+    &quot;Salir&quot;) break;;
+    *) echo &quot;Opción inválida&quot;;;
+  esac
+done
+</code></pre><h3 id="1a35a0a7-8852-409e-8b8e-8dc8b58d1668" class="">40. <strong>Manejo de Errores y Excepciones:</strong></h3><p id="be4331dd-1f51-4c21-96da-5b7cb5d9fc89" class="">Implementa un manejo de errores más robusto con el uso de <code>trap</code> y la función <code>exit</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7e535da7-638f-4134-9cef-4b3df23a0cc1" class="code code-wrap"><code class="language-Shell">function ejecutar_comando {
+  $1 || { echo &quot;Error al ejecutar $1&quot;; exit 1; }
+}
+
+trap &#x27;echo &quot;Se produjo un error inesperado&quot;; exit 1;&#x27; ERR
+
+ejecutar_comando &quot;comando1&quot;
+ejecutar_comando &quot;comando2&quot;
+</code></pre><h3 id="4a7456fd-c01d-43cb-912f-e90fa5078a3b" class="">41. <strong>Llamadas a APIs y Parsing JSON:</strong></h3><p id="adfbcc9a-769d-4388-9d1e-96c2f504432e" class="">Realiza solicitudes HTTP y analiza JSON usando herramientas como <code>curl</code> y <code>jq</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9d6918f6-fa09-43d7-b22e-5bf2185d4c97" class="code code-wrap"><code class="language-Shell">RESPUESTA=$(curl -s &quot;&lt;https://api.example.com/data&gt;&quot;)
+VALOR=$(echo $RESPUESTA | jq &quot;.key&quot;)
+echo &quot;Valor obtenido: $VALOR&quot;
+</code></pre><h3 id="01f57ce6-7b6f-45ce-b7dc-164b71772206" class="">42. <strong>Uso de </strong><code><strong>awk</strong></code><strong> para Procesamiento de Texto:</strong></h3><p id="e1a48d3c-d524-46d3-9dd4-cf5ed1e8e58a" class=""><code>awk</code> es poderoso para procesar y analizar datos tabulares:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2d9854ff-d63c-415d-9db3-6ecfd3731fe9" class="code code-wrap"><code class="language-Shell">cat archivo.csv | awk -F&#x27;,&#x27; &#x27;{print $1,$3}&#x27;  # Muestra la primera y tercera columna
+</code></pre><h3 id="d8d0d8eb-71c1-44b7-904f-a6d1cb1de3d8" class="">43. <strong>Uso de </strong><code><strong>find</strong></code><strong> y </strong><code><strong>grep</strong></code><strong> para Búsqueda de Archivos:</strong></h3><p id="14f8adb6-d72a-4c3a-be60-90414bd21df4" class="">Encuentra archivos y busca patrones dentro de ellos:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="26ede4c8-e89d-4d6a-ae66-156e4f3f68fe" class="code code-wrap"><code class="language-Shell">ARCHIVOS=$(find /ruta -name &quot;*.txt&quot;)
+for ARCHIVO in $ARCHIVOS; do
+  grep &quot;patrón&quot; $ARCHIVO
+done
+</code></pre><h3 id="184c1187-5fdb-45d7-b554-135d15aa341a" class="">44. <strong>Manipulación de Fechas con </strong><code><strong>date</strong></code><strong> y </strong><code><strong>dateutils</strong></code><strong>:</strong></h3><p id="d709bbf3-2748-4a0f-a93f-5eec1c892002" class="">Realiza operaciones avanzadas con fechas:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b19a19ba-3013-4c56-be29-87577c1fc642" class="code code-wrap"><code class="language-Shell">FECHA_ACTUAL=$(date &quot;+%Y-%m-%d&quot;)
+FECHA_MANANA=$(date -d &quot;tomorrow&quot; &quot;+%Y-%m-%d&quot;)
+DIFERENCIA_DIAS=$(dateutils.ddiff $FECHA_ACTUAL $FECHA_MANANA)
+echo &quot;Diferencia en días: $DIFERENCIA_DIAS&quot;
+</code></pre><h3 id="5bca1a88-6099-47c8-b6f7-6e12e647abe3" class="">45. <strong>Uso de </strong><code><strong>nc</strong></code><strong> (Netcat) para Comunicación en Red:</strong></h3><p id="92147389-fdd1-4573-8fee-6902b54c0ebe" class=""><code>nc</code> permite la comunicación entre procesos a través de la red:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0d166c19-a39a-4608-90ac-a614dc0f7006" class="code code-wrap"><code class="language-Shell"># Servidor
+nc -l -p 1234
+
+# Cliente
+echo &quot;Hola, servidor&quot; | nc localhost 1234
+</code></pre><h3 id="99c804bc-3a5b-4891-960a-d9e7a31c02ea" class="">46. <strong>Verificación de Integridad de Archivos con </strong><code><strong>md5sum</strong></code><strong> o </strong><code><strong>sha256sum</strong></code><strong>:</strong></h3><p id="20160f48-9d8f-4133-b9b4-d0c843a86c4e" class="">Calcula el hash de un archivo para verificar su integridad:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e294db96-06a2-47f4-b93c-2abacb3db131" class="code code-wrap"><code class="language-Shell">HASH=$(md5sum archivo.txt | awk &#x27;{print $1}&#x27;)
+echo &quot;El hash MD5 de archivo.txt es: $HASH&quot;
+</code></pre><h3 id="564fd242-559a-4c6b-9fab-f42eaaa8b588" class="">47. <strong>Uso de </strong><code><strong>awk</strong></code><strong> y </strong><code><strong>sort</strong></code><strong> para Estadísticas:</strong></h3><p id="81d2cc28-05cc-4f19-9b7d-24311256b847" class="">Procesa y analiza datos para obtener estadísticas:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="09fcfac6-4a23-4304-adc9-b07aa073d45e" class="code code-wrap"><code class="language-Shell">cat datos.txt | awk &#x27;{print $2}&#x27; | sort | uniq -c | sort -nr
+</code></pre><h3 id="6baecf02-d48f-47cb-8d86-bc2a4aba511b" class="">48. <strong>Automatización de Tareas con </strong><code><strong>cron</strong></code><strong>:</strong></h3><p id="49369c92-afd1-4c37-9e25-ef3d78524d28" class="">Programa tareas periódicas utilizando el cron job:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2a9792b6-f288-460b-b30d-5e65c69e51d8" class="code code-wrap"><code class="language-Shell"># Editar la tarea programada
+crontab -e
+
+# Ejemplo de ejecución diaria a las 2:30 AM
+30 2 * * * /ruta/al/script.sh
+</code></pre><h3 id="2830a679-463c-4a58-9fc3-62cc4ebc32d5" class="">49. <strong>Uso de </strong><code><strong>printf</strong></code><strong> para Formateo de Salida:</strong></h3><p id="c4b6afc3-4b57-4862-a844-fdd7670d0319" class=""><code>printf</code> permite un mayor control sobre la formateo de la salida:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="966d4252-9d8f-4089-911e-a6586a812482" class="code code-wrap"><code class="language-Shell">NOMBRE=&quot;Juan&quot;
+EDAD=25
+printf &quot;Nombre: %-10s Edad: %d\\n&quot; &quot;$NOMBRE&quot; $EDAD
+</code></pre><h3 id="3061aa27-9cc1-4ac2-a639-04595f58fbd0" class="">50. <strong>Uso de </strong><code><strong>watch</strong></code><strong> para Observar Cambios:</strong></h3><p id="64c254f5-4d37-4d8c-b2d4-8b6b352c3ddc" class="">Observa los cambios en tiempo real en la salida de un comando:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="f2e5e0f6-64d4-485f-a9ee-79443ec045dd" class="code code-wrap"><code class="language-Shell">watch -n 1 &quot;ls -l&quot;
+</code></pre><hr id="2819c6ae-75ec-4954-b34a-6267cb532d6a"/><h3 id="1a8546b9-4faa-4e9c-a624-1f6cc89320be" class="">Scripting para ciberseguridad<br/><br/></h3><h3 id="bd6fad14-cf25-4e5a-b8ee-1cc3ddbd3b18" class="">1. <strong>Análisis de Logs:</strong></h3><p id="e38bddbd-ba34-4563-9436-eae3c3850474" class="">Bash es útil para analizar logs y eventos de seguridad. Puedes buscar patrones sospechosos o realizar análisis de comportamiento:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="52e06b28-ad95-473f-ad7a-89058b1f97f9" class="code code-wrap"><code class="language-Shell">grep &quot;Acceso no autorizado&quot; /var/log/auth.log
+</code></pre><h3 id="71d8e5c0-1cbb-42bd-aa3c-34c60a31e17e" class="">2. <strong>Exploración de Red:</strong></h3><p id="b25e8757-5a6b-4092-8975-fc02809dbcdb" class="">Automatiza la exploración de red para identificar hosts activos, puertos abiertos, etc.:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1d478483-1a80-41fe-9b36-5b203725cdf5" class="code code-wrap"><code class="language-Shell">nmap -sP 192.168.1.0/24
+</code></pre><h3 id="0edac2d3-380c-476c-a0b3-d37f2a442800" class="">3. <strong>Detección de Cambios en Archivos:</strong></h3><p id="629832c0-525f-4f5e-8b92-c7aecf11ec1a" class="">Usa scripts para monitorear cambios en archivos críticos o configuraciones:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b3068d09-bde9-41b8-a02a-f450812e06ed" class="code code-wrap"><code class="language-Shell">MD5_INICIAL=$(md5sum archivo_importante)
+while true; do
+  MD5_ACTUAL=$(md5sum archivo_importante)
+  if [ &quot;$MD5_INICIAL&quot; != &quot;$MD5_ACTUAL&quot; ]; then
+    echo &quot;¡Alerta! El archivo ha cambiado.&quot;
+    # Realizar acciones de respuesta a incidentes
+    break
+  fi
+  sleep 60  # Comprobar cada minuto
+done
+</code></pre><h3 id="28ce7ea7-cdaf-4c9f-84f1-ff979801135e" class="">4. <strong>Escaneo de Vulnerabilidades:</strong></h3><p id="77355f86-9251-4a48-aedc-35b05fd64104" class="">Integra herramientas de escaneo de vulnerabilidades y analiza los resultados:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="dc1abf8b-064f-4f29-84a8-eb9dfbeaaba2" class="code code-wrap"><code class="language-Shell">nmap --script vuln 192.168.1.1
+</code></pre><h3 id="87886352-bdb1-462b-9d0a-738191d5f4b3" class="">5. <strong>Auditorías de Configuración:</strong></h3><p id="3e16b261-d056-4530-b9de-9ef78be3dab8" class="">Automatiza auditorías de configuración para asegurar que los sistemas cumplen con las políticas de seguridad:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="210fb985-a171-4382-b1d4-442036a5805b" class="code code-wrap"><code class="language-Shell">auditctl -w /etc/passwd -p wa
+</code></pre><h3 id="856d9ffe-bbc7-496f-997f-497009c99ec5" class="">6. <strong>Detección de Rootkits:</strong></h3><p id="b9c83ad2-a620-40d1-bbdf-347f5862213b" class="">Realiza chequeos regulares en busca de rootkits utilizando herramientas como <code>rkhunter</code> o <code>chkrootkit</code>:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2b9d49cf-13ca-4e4b-8820-908d92cc61ba" class="code code-wrap"><code class="language-Shell">rkhunter --check
+</code></pre><h3 id="f2a00ad3-77d2-41b8-87e8-5526ce93836d" class="">7. <strong>Recopilación de Información del Sistema:</strong></h3><p id="717135c7-f56b-4da6-89e0-64a8598cdfea" class="">Automatiza la recopilación de información del sistema para análisis posterior:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="52e99ec4-40a5-4e2c-a747-2067a41be84c" class="code code-wrap"><code class="language-Shell">echo &quot;Información del Sistema:&quot; &gt; informacion.txt
+uname -a &gt;&gt; informacion.txt
+cat /etc/passwd &gt;&gt; informacion.txt
+</code></pre><h3 id="7dc3a500-e96c-4f0c-b6f2-3d8bec72e550" class="">8. <strong>Respuesta a Incidentes:</strong></h3><p id="b4ddca13-e940-43a7-a06b-c6b23f661e2f" class="">Desarrolla scripts para ayudar en la respuesta a incidentes, como bloquear direcciones IP sospechosas o realizar copias de seguridad:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="602e2521-5fdf-4054-8998-719583ec8a2b" class="code code-wrap"><code class="language-Shell">iptables -A INPUT -s IP_SOSPECHOSA -j DROP
+</code></pre><h3 id="60db2a25-5648-4092-971b-c407cb5b5da0" class="">9. <strong>Generación de Contraseñas Seguras:</strong></h3><p id="c7802393-1b37-4436-8714-ba8d32600a56" class="">Crea scripts que generen contraseñas seguras automáticamente:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e8f4da9a-2a7c-4fbb-8852-0f1c63caf120" class="code code-wrap"><code class="language-Shell">openssl rand -base64 12
+</code></pre><h3 id="34521432-4f5d-46d0-ba9f-f64581041e70" class="">10. <strong>Encriptación de Archivos:</strong></h3><p id="25f44493-2a45-4e28-91b3-8ceff8eab14f" class="">Automatiza la encriptación y desencriptación de archivos importantes:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="471d1627-94bc-41a1-8a18-5045954caed1" class="code code-wrap"><code class="language-Shell"># Encriptar
+gpg -c archivo_secreto.txt
+
+# Desencriptar
+gpg archivo_secreto.txt.gpg
+</code></pre><h3 id="6bd4f821-9412-4cd1-886b-66d1d4d652ed" class="">11. <strong>Validación de Firma Digital:</strong></h3><p id="66d4ccae-d857-44d5-b868-d6cf9db7d843" class="">Usa scripts para verificar la integridad y autenticidad de archivos con firma digital:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="29815549-b754-428e-9726-773943cef939" class="code code-wrap"><code class="language-Shell">gpg --verify archivo_firmado.sig archivo_original
+</code></pre><h3 id="2c78f219-52e2-46e9-a012-9382ade730d6" class="">12. <strong>Escritura Segura de Scripts:</strong></h3><p id="39162c9e-9248-40ae-92b8-b6879808aead" class="">Cuando escribes scripts para tareas de ciberseguridad, asegúrate de seguir prácticas seguras de codificación y evita vulnerabilidades comunes.</p><hr id="d384b40a-a43a-4b9e-8f6e-acb29ebaa772"/><h2 id="f548314e-eb1d-4630-9671-75954ab1ca19" class="">Bash POO</h2><p id="b00e85d0-a0bc-427e-9dad-739927facdd2" class="">Bash no es un lenguaje de programación orientado a objetos (POO) en el sentido tradicional. Sin embargo, es posible emular ciertos conceptos de la programación orientada a objetos utilizando funciones y variables en Bash. </p><h3 id="a28bf2c6-8434-426e-a46b-fee10b730990" class="">1. <strong>Funciones como Métodos:</strong></h3><p id="4764db7d-b17a-4918-b306-db027cef9853" class="">En lugar de métodos, usamos funciones. Podemos organizar funciones relacionadas en un script y llamarlas según sea necesario.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d9357d18-464b-4373-9d36-5cb98ffc4d75" class="code code-wrap"><code class="language-Shell"># Definición de una &quot;clase&quot; (grupo de funciones relacionadas)
+Persona() {
+  nombre=&quot;&quot;
+  edad=0
+}
+
+# &quot;Constructor&quot; para inicializar un objeto
+crear_persona() {
+  local persona
+  persona=$(Persona)
+  echo &quot;$persona&quot;
+}
+
+# &quot;Método&quot; para establecer el nombre
+set_nombre() {
+  local objeto=$1
+  local nuevo_nombre=$2
+  eval &quot;$objeto.nombre=\\&quot;$nuevo_nombre\\&quot;&quot;
+}
+
+# &quot;Método&quot; para obtener el nombre
+get_nombre() {
+  local objeto=$1
+  eval &quot;echo \\$$objeto.nombre&quot;
+}
+
+# Uso de la &quot;clase&quot;
+persona1=$(crear_persona)
+set_nombre &quot;$persona1&quot; &quot;Juan&quot;
+echo &quot;Nombre: $(get_nombre &quot;$persona1&quot;)&quot;
+</code></pre><h3 id="a3da06fe-bed4-454d-a7e2-441f21cc772c" class="">2. <strong>Propiedades de Objeto usando Variables:</strong></h3><p id="55f617e1-6d30-4638-8216-7cf92d597cc6" class="">Usamos variables para simular propiedades de un objeto.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2af548a3-de0b-45e0-9cd2-ed1e2fb72dac" class="code code-wrap"><code class="language-Shell"># Definición de una &quot;clase&quot;
+Coche() {
+  color=&quot;&quot;
+  velocidad=0
+}
+
+# Crear instancia de la &quot;clase&quot;
+mi_coche=$(Coche)
+
+# Establecer propiedades
+mi_coche.color=&quot;Rojo&quot;
+mi_coche.velocidad=60
+
+# Acceder a propiedades
+echo &quot;Color: ${mi_coche.color}, Velocidad: ${mi_coche.velocidad} km/h&quot;
+</code></pre><h3 id="006a50e6-bd26-464d-ad0a-fb1d79d92800" class="">3. <strong>Herencia (Simulada):</strong></h3><p id="1f848805-032d-44e0-ae49-aa0b33c799bf" class="">Podemos simular la herencia mediante la reutilización de funciones.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cc4d1dd9-bc18-4289-b56e-c3fd5686d4d1" class="code code-wrap"><code class="language-Shell"># &quot;Clase&quot; base
+Animal() {
+  nombre=&quot;&quot;
+  sonido=&quot;&quot;
+}
+
+# &quot;Clase&quot; derivada
+Perro() {
+  Animal
+  raza=&quot;&quot;
+}
+
+# Crear instancia de la &quot;clase&quot; derivada
+mi_perro=$(Perro)
+
+# Establecer propiedades
+mi_perro.nombre=&quot;Fido&quot;
+mi_perro.sonido=&quot;Guau&quot;
+mi_perro.raza=&quot;Labrador&quot;
+
+# Acceder a propiedades
+echo &quot;Nombre: ${mi_perro.nombre}, Sonido: ${mi_perro.sonido}, Raza: ${mi_perro.raza}&quot;
+</code></pre><h3 id="f65d6bd5-8b7f-4e9b-9f38-c8fc207b48c0" class="">4. <strong>Encapsulación (Simulada):</strong></h3><p id="1533a35c-5a6b-41fe-bcc4-7752291a4f91" class="">Usamos convenciones de nomenclatura para simular encapsulación.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b6c4330e-0e96-4bb2-9a47-d05dd29df74f" class="code code-wrap"><code class="language-Shell"># &quot;Clase&quot;
+CuentaBancaria() {
+  _saldo=0  # Convención: el guion bajo indica encapsulación
+}
+
+# &quot;Método&quot; para obtener el saldo
+get_saldo() {
+  local objeto=$1
+  eval &quot;echo \\$$objeto._saldo&quot;
+}
+
+# &quot;Método&quot; para depositar dinero
+depositar() {
+  local objeto=$1
+  local cantidad=$2
+  eval &quot;$objeto._saldo=$(( $objeto._saldo + cantidad ))&quot;
+}
+
+# Uso de la &quot;clase&quot;
+mi_cuenta=$(CuentaBancaria)
+depositar &quot;$mi_cuenta&quot; 100
+echo &quot;Saldo actual: $(get_saldo &quot;$mi_cuenta&quot;)&quot;
+</code></pre><h3 id="e4801ce2-c59f-4138-9d4b-4183f57a68b2" class="">5. <strong>Polimorfismo (Simulado):</strong></h3><p id="efcbfcc8-6178-4827-97da-fcfa322bf0ca" class="">Puedes simular polimorfismo permitiendo que funciones actúen de manera diferente según los parámetros que reciben.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="dceb12ef-f3d0-428b-8e2d-ac9a47bcb18f" class="code code-wrap"><code class="language-Shell"># &quot;Clase&quot; base
+Figura() {
+  dibujar() {
+    echo &quot;Dibujando una figura.&quot;
+  }
+}
+
+# &quot;Clase&quot; derivada
+Circulo() {
+  Figura
+  radio=0
+
+  dibujar() {
+    echo &quot;Dibujando un círculo con radio $radio.&quot;
+  }
+}
+
+# &quot;Clase&quot; derivada
+Rectangulo() {
+  Figura
+  ancho=0
+  altura=0
+
+  dibujar() {
+    echo &quot;Dibujando un rectángulo de $ancho x $altura.&quot;
+  }
+}
+
+# Función polimórfica
+dibujar_figura() {
+  local figura=$1
+  $figura.dibujar
+}
+
+# Uso del &quot;polimorfismo&quot;
+mi_circulo=$(Circulo)
+mi_rectangulo=$(Rectangulo)
+
+dibujar_figura &quot;$mi_circulo&quot;
+dibujar_figura &quot;$mi_rectangulo&quot;
+</code></pre><h3 id="dca85347-9cb8-4400-a161-60779ff52893" class="">6. <strong>Interfaces (Simuladas):</strong></h3><p id="68b50737-5e75-4f02-86b5-aa1cda349505" class="">Aunque Bash no admite interfaces como en lenguajes orientados a objetos, puedes simular interfaces utilizando convenciones de nombres.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="b6452dd4-58ea-488d-96fd-a1a8db95d844" class="code code-wrap"><code class="language-Shell"># &quot;Interfaz&quot;
+InterfazImprimible() {
+  imprimir() {
+    echo &quot;Imprimiendo desde la interfaz.&quot;
+  }
+}
+
+# &quot;Clase&quot; que implementa la &quot;interfaz&quot;
+ClaseImplementadora() {
+  InterfazImprimible
+}
+
+# Uso de la &quot;interfaz&quot;
+objeto_implementador=$(ClaseImplementadora)
+objeto_implementador.imprimir
+</code></pre><h3 id="4ee5face-cef6-4913-b3ea-3dbcaa9aea1c" class="">7. <strong>Manejo de Errores (Simulado):</strong></h3><p id="d9425da7-6476-4727-a645-53141461a0b1" class="">Puedes simular el manejo de errores usando funciones de retorno y códigos de error.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="40a11f61-c77d-473e-998a-b8513b20dff6" class="code code-wrap"><code class="language-Shell"># &quot;Clase&quot;
+Calculadora() {
+  sumar() {
+    local resultado=$(( $1 + $2 ))
+    echo $resultado
+  }
+
+  restar() {
+    local resultado=$(( $1 - $2 ))
+    echo $resultado
+  }
+}
+
+# Uso de la &quot;clase&quot; con manejo de errores simulado
+mi_calculadora=$(Calculadora)
+
+resultado_suma=$(mi_calculadora.sumar 5 3) || { echo &quot;Error al sumar.&quot;; exit 1; }
+resultado_resta=$(mi_calculadora.restar 5 &quot;a&quot;) || { echo &quot;Error al restar.&quot;; exit 1; }
+
+echo &quot;Resultado de la suma: $resultado_suma&quot;
+echo &quot;Resultado de la resta: $resultado_resta&quot;
+</code></pre><hr id="e74d5943-1d8f-4f1a-9beb-7c31bbf4774c"/><h2 id="2c767048-e9f8-4e97-9f64-21066252fb67" class="">Mas Conceptos</h2><h3 id="3c8d8130-eb7e-4cbc-be00-ec34f6e84c4c" class="">1. <strong>Subshells:</strong></h3><p id="471c4c99-cb8a-47c0-aa51-872340da03c8" class="">Un subshell es un nuevo proceso de shell creado dentro de un shell existente. Puedes ejecutar comandos en un subshell utilizando paréntesis <code>( )</code> o con la palabra clave <code>$( )</code>. Los cambios realizados en un subshell no afectan al shell principal.</p><p id="20a20133-902f-41e2-8c5d-7de328548d94" class="">Ejemplo:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="d904b963-b220-4967-9135-81bcf2197968" class="code code-wrap"><code class="language-Shell"># Subshell con paréntesis
+( comandos )
+
+# Subshell con $()
+variable=$(comando)
+</code></pre><h3 id="2cad7636-9694-4c98-9f30-54c9af87774a" class="">2. <strong>Procesos en Segundo Plano:</strong></h3><p id="ce12b087-099a-4994-b7ef-a4a29efbc921" class="">Puedes ejecutar comandos en segundo plano agregando un <code>&amp;</code> al final del comando. Esto permite que el shell principal continúe ejecutando otros comandos mientras el comando en segundo plano se ejecuta.</p><p id="e176537c-f014-433e-b517-a554b26e13fe" class="">Ejemplo:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1f84712a-725e-4462-b46b-e7a1438c6ab5" class="code code-wrap"><code class="language-Shell">comando_en_segundo_plano &amp;
+</code></pre><h3 id="95f2fa45-d5b3-4ead-acf2-bf66fd7e4c89" class="">3. <strong>Variables de Entorno:</strong></h3><p id="515a68ee-0bb2-4927-b8e5-101655fe36b7" class="">Las variables de entorno son variables que están disponibles para todos los procesos hijos de un shell. Puedes establecerlas usando <code>export</code> y acceder a ellas en otros scripts o sesiones de la shell.</p><p id="b7533fe9-abb5-47d9-b49e-11b5af3a37b7" class="">Ejemplo:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="fd675869-6546-4bdd-9610-baf1d559d021" class="code code-wrap"><code class="language-Shell">export MI_VARIABLE=&quot;Mi Valor&quot;
+</code></pre><h3 id="36e609fe-680e-41df-9d9c-2fd8e957cfb6" class="">4. <strong>Comodines (Wildcards):</strong></h3><p id="4ae00da5-d587-4328-b882-ec05d1a1bd60" class="">Los comodines son caracteres especiales que se utilizan para hacer coincidir archivos o nombres de directorios. Algunos comodines comunes son <code>*</code> (coincide con cualquier cadena de caracteres) y <code>?</code> (coincide con un solo carácter).</p><p id="861c22db-8f76-4688-a767-3de0acec2126" class="">Ejemplo:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9da582f6-66e3-437f-b48b-7ee2ea8d0c78" class="code code-wrap"><code class="language-Shell">ls *.txt   # Lista todos los archivos con extensión .txt
+</code></pre><h3 id="a89b0c2a-83a8-45e6-9ca3-4b398cf70c51" class="">5. <strong>Expansión de Comandos:</strong></h3><p id="31c18761-1c0c-4998-bd16-7d7e42d38416" class="">La expansión de comandos permite utilizar la salida de un comando como argumento para otro comando. Puedes hacer esto utilizando comillas invertidas `` o <code>$()</code>.</p><p id="aefb134c-cd05-4497-9d8b-65817e216644" class="">Ejemplo:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="9a1a18c8-28ef-470d-bf1d-f04cd75ae530" class="code code-wrap"><code class="language-Shell">resultado=$(comando)
+</code></pre><h3 id="13e1666f-f1aa-4350-bc3d-f27fa5130227" class="">6. <strong>Heredoc:</strong></h3><p id="5bdbd96d-621f-4406-ae42-3f6bd514fbd0" class="">Heredoc (documentos aquí) te permite insertar bloques de texto directamente en un script de shell. Es útil para la entrada multilinea o la creación de archivos de texto.</p><p id="a678876c-865a-45f2-b1ff-0d082d27f791" class="">Ejemplo:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="fd1becb3-fbef-4fdf-8d37-e308c07eea89" class="code code-wrap"><code class="language-Shell">cat &lt;&lt;EOF
+Texto
+multilinea
+EOF
+</code></pre><h3 id="a876c150-1d7c-4323-adab-d50c0534ba3e" class="">7. <strong>Variables Especiales:</strong></h3><p id="9dd8e31b-68f7-4945-85da-71a44a477bad" class="">La shell proporciona varias variables especiales, como <code>$0</code> (nombre del script), <code>$1</code>, <code>$2</code>, ... (parámetros posicionales), <code>$#</code> (número de parámetros), <code>$?</code> (estado de salida del último comando), etc.</p><p id="8be09c5d-c019-4de2-9550-0d7f9ef53d16" class="">Ejemplo:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="27a99c85-047b-464c-ba20-abcab0bf8707" class="code code-wrap"><code class="language-Shell">echo &quot;Nombre del script: $0&quot;
+</code></pre><h3 id="350e41c4-8607-43c8-a8cb-4e15d7b42e4a" class="">8. <strong>Ejecución Condicional con </strong><code><strong>&amp;&amp;</strong></code><strong> y </strong><code><strong>||</strong></code><strong>:</strong></h3><p id="647a1b3a-8036-4bdd-b1c0-a3f016ccf460" class="">Puedes ejecutar comandos condicionalmente utilizando <code>&amp;&amp;</code> (AND lógico) y <code>||</code> (OR lógico). El comando después de <code>&amp;&amp;</code> se ejecuta solo si el comando anterior tiene éxito, mientras que el comando después de <code>||</code> se ejecuta solo si el comando anterior falla.</p><p id="aed79451-579b-4d5b-b268-6a0500a9404e" class="">Ejemplo:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="0dc8f475-51fe-4662-9131-b0339dbb2ab2" class="code code-wrap"><code class="language-Shell">comando_exitoso &amp;&amp; echo &quot;Éxito&quot; || echo &quot;Fallo&quot;
+</code></pre><h3 id="e3a36f11-6748-4a99-9293-9594c4a93b91" class="">9. <strong>Manipulación de Archivos:</strong></h3><p id="5848396a-9fd1-447a-ad66-b4d103ca9932" class="">Bash proporciona potentes comandos para manipular archivos. Puedes realizar operaciones como copiar, mover, renombrar y eliminar archivos.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="63e03985-9f34-47c5-8356-18c1d70eb516" class="code code-wrap"><code class="language-Shell"># Copiar un archivo
+cp archivo.txt destino/
+
+# Mover un archivo
+mv archivo.txt nuevo_directorio/
+
+# Renombrar un archivo
+mv antiguo_nombre.txt nuevo_nombre.txt
+
+# Eliminar un archivo
+rm archivo.txt
+</code></pre><h3 id="278b88a4-a544-4797-9b50-3aca5fdf8df9" class="">10. <strong>Procesos en Segundo Plano:</strong></h3><p id="1b740e65-a5ad-4d6f-9df0-e855fa3e4f7c" class="">Puedes ejecutar comandos en segundo plano para liberar la terminal.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="ebfa5fbf-4f88-4559-a5a4-23d1db527a90" class="code code-wrap"><code class="language-Shell"># Ejecutar un comando en segundo plano
+comando_en_segundo_plano &amp;
+
+# Ver los procesos en ejecución
+jobs
+
+# Detener un proceso en segundo plano
+kill %1  # Donde 1 es el número de trabajo mostrado por &quot;jobs&quot;
+</code></pre><h3 id="7d770715-f770-452b-a550-64dc5c849fae" class="">11. <strong>Variables Especiales:</strong></h3><p id="9d2dc7be-1602-4f60-9d34-ef4a56c28195" class="">Bash tiene variables especiales que almacenan información sobre la ejecución del script.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="70aebd7a-82b4-4f97-a0ab-0a4948a5a915" class="code code-wrap"><code class="language-Shell"># Obtener el PID (Identificador de Proceso) del script
+echo &quot;El PID del script es $$&quot;
+
+# Obtener el número de argumentos pasados al script
+echo &quot;Número de argumentos: $#&quot;
+
+# Obtener los argumentos del script
+echo &quot;Argumentos del script: $@&quot;
+</code></pre><h3 id="59ab2bc3-5ba9-4ef5-8bbc-28778cdc512f" class="">12. <strong>Manipulación de Strings:</strong></h3><p id="0beca2fe-163a-431c-9bfd-3a97d96c656f" class="">Bash proporciona varias formas de manipular cadenas de texto.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="59d75537-db4f-443a-9539-b87ffe7f2549" class="code code-wrap"><code class="language-Shell"># Longitud de una cadena
+cadena=&quot;Hola, mundo&quot;
+echo &quot;La longitud de la cadena es ${#cadena}&quot;
+
+# Extracción de subcadena
+subcadena=${cadena:0:4}
+echo &quot;La subcadena es $subcadena&quot;
+
+# Reemplazar parte de una cadena
+nueva_cadena=${cadena/Hola/Adiós}
+echo &quot;La nueva cadena es $nueva_cadena&quot;
+</code></pre><h3 id="8e585cdb-1021-457a-a936-6866d8fba16c" class="">13. <strong>Compresión y Descompresión:</strong></h3><p id="705dfddd-fadd-4d07-8212-728febf6565c" class="">Bash es compatible con varias utilidades para comprimir y descomprimir archivos.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="31baf109-5b9d-435c-b99b-5a71efa3b244" class="code code-wrap"><code class="language-Shell"># Comprimir un archivo
+tar -czvf archivo.tar.gz archivo/
+
+# Descomprimir un archivo
+tar -xzvf archivo.tar.gz -C destino/
+</code></pre><h3 id="d091ee5b-a3d6-401b-b0c5-b18b9ad23d7b" class="">14. <strong>Manejo de Señales:</strong></h3><p id="62053bbb-028d-4c31-b4c3-33904d080771" class="">Puedes capturar y manejar señales enviadas al script.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="945598f2-4e08-4e9e-914e-7df41e6f0cd2" class="code code-wrap"><code class="language-Shell">trap &#x27;echo &quot;Señal recibida. Saliendo.&quot;&#x27; SIGINT
+
+# Bucle infinito para esperar señales
+while true; do
+  sleep 1
+done
+</code></pre><h3 id="e98ccd2d-1733-4461-bd26-7fedc29251f1" class="">15. <strong>Lectura Segura de Contraseñas:</strong></h3><p id="4a4c97fd-046f-4741-a690-c2a375794ba1" class="">Lee contraseñas sin mostrarlas en la pantalla.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7943e554-d657-4f9e-8124-8355ce887ba2" class="code code-wrap"><code class="language-Shell">echo -n &quot;Ingrese su contraseña: &quot;
+read -s contrasena
+echo &quot;Contraseña ingresada.&quot;
+</code></pre><h3 id="f5467b71-8501-4d82-9bc2-d9776f2fd0c5" class="">16. <strong>Creación de Funciones con Parámetros Opcionales:</strong></h3><p id="9b51b676-7288-4eb1-b833-94c80d784832" class="">Permite funciones con parámetros opcionales utilizando valores predeterminados.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="6ad96398-820a-4bd8-b942-148a1ca40712" class="code code-wrap"><code class="language-Shell">funcion_con_parametro() {
+  parametro=${1:-&quot;Valor Predeterminado&quot;}
+  echo &quot;El parámetro es: $parametro&quot;
+}
+
+funcion_con_parametro          # Utiliza el valor predeterminado
+funcion_con_parametro &quot;Nuevo&quot;  # Utiliza el valor proporcionado
+</code></pre><h3 id="d1818295-de10-4d4c-87b6-f6ca3a22eb59" class="">17. <strong>Ejecución Condicional:</strong></h3><p id="d9a10297-e7e7-4d2f-a1cc-a848a9bdaa79" class="">Ejecuta un comando solo si otro comando tuvo éxito.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="06665af6-024a-4630-a389-a59bd5593298" class="code code-wrap"><code class="language-Shell">comando1 &amp;&amp; echo &quot;El comando1 tuvo éxito&quot; || echo &quot;El comando1 falló&quot;
+</code></pre><h3 id="5f21485f-033c-430e-bda4-eda4cc6dd7e7" class="">18. <strong>Expansión Aritmética:</strong></h3><p id="b31ebe12-7594-4ace-ad75-ea36cfac4b3d" class="">Realiza operaciones matemáticas directamente en la línea de comandos.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7a435a96-49a2-40fa-b005-48f341e3d4c8" class="code code-wrap"><code class="language-Shell">resultado=$((5 + 3))
+echo &quot;El resultado de la suma es $resultado&quot;
+</code></pre><h3 id="fee34308-4148-4e16-8bcd-91fe68a4acc3" class="">19. <strong>Instalación Condicional de Paquetes:</strong></h3><p id="67740c5c-27a6-4ce9-b67e-c5ecc727c034" class="">Puedes verificar si un paquete está instalado antes de usarlo.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="e2599b0e-b873-4d8c-9f6a-25b8bb6f9a77" class="code code-wrap"><code class="language-Shell"># Verificar si curl está instalado
+if command -v curl &amp;&gt; /dev/null; then
+  echo &quot;curl está instalado&quot;
+else
+  echo &quot;curl no está instalado&quot;
+fi
+
+</code></pre><h3 id="1538c5ba-fd08-484d-bb0c-9ec31ff19697" class="">20. <strong>Uso de </strong><code><strong>trap</strong></code><strong> para Limpieza al Salir:</strong></h3><p id="4df24718-15c3-4653-bfbf-50184635d6aa" class=""><code>trap</code> permite ejecutar comandos antes de salir del script, útil para la limpieza.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7bc64c2f-8146-44aa-9db7-8ec50dfdc5e4" class="code code-wrap"><code class="language-Shell">limpiar() {
+  echo &quot;Limpiando antes de salir...&quot;
+  # Agregar comandos de limpieza aquí
+}
+
+trap limpiar EXIT
+
+</code></pre><hr id="151e785e-2ae3-4b5f-9f3e-d0ab877b9d72"/><h2 id="b1fae4bf-96e7-47b5-ab04-834a905d18c1" class="">Palabras Reservadas</h2><p id="805e2b93-e403-4db9-a940-5a9060eea46c" class="">Las palabras reservadas son aquellas que tienen un significado especial para la shell. Se utilizan para comenzar y finalizar los comandos compuestos de la shell.</p><p id="1e5c93cf-bc8a-4ccd-b0a2-97807cd8fad5" class="">Las siguientes palabras son reconocidas como reservadas cuando no están entre comillas y son la primera palabra de un comando (ver excepciones abajo):</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="4d57dba8-ef7e-4d65-b9af-035d27f258bd" class="code code-wrap"><code class="language-Shell">if then elif else fi time
+for in until while do done
+case esac coproc select function
+{ } [[ ]] !
+
+</code></pre><p id="7800cf1e-039e-4736-b705-cb6fa1b9d666" class=""><code>in</code> se reconoce como una palabra reservada si es la tercera palabra de un comando <code>case</code> o <code>select</code>. <code>in</code> y <code>do</code> se reconocen como palabras reservadas si son la tercera palabra en un comando <code>for</code>.</p><hr id="e511f66d-9b37-43c5-a775-1f21cef33e1f"/><h2 id="6e1963eb-0053-4a8e-8004-316f83d74d89" class="">Funciones en la Shell</h2><p id="75045a55-c2d7-469f-99c1-99b1f6d606e1" class="">Las funciones en la shell permiten agrupar comandos bajo un nombre único para su ejecución posterior. Se declaran de la siguiente manera:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7f3d495c-2642-44e7-8e30-9bae646f1ef9" class="code code-wrap"><code class="language-Shell">nombre_funcion () {
+  comandos
+}
+</code></pre><p id="c511babe-984a-4ce4-a0cd-0123deb511cc" class="">o</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="61b6474a-011e-4069-9986-36f560ad55d0" class="code code-wrap"><code class="language-Shell">function nombre_funcion {
+  comandos
+}
+</code></pre><p id="76d32430-8891-4e1d-b191-7a12539e836e" class="">Al ejecutar <code>nombre_funcion</code> como un comando, se ejecutan los comandos asociados. Las funciones se ejecutan en el contexto actual de la shell, sin crear un nuevo proceso.</p><p id="db4ec4a9-92ae-4146-9a0a-09c61430efb3" class="">Cuando una función se ejecuta, los argumentos se convierten en parámetros posicionales y el parámetro especial <code>#</code> se actualiza. El estado de salida de la función es el estado del último comando ejecutado en su cuerpo.</p><p id="41788e58-dee3-44e5-bfef-11bdfd39183e" class="">Las variables locales se pueden declarar con <code>local</code>. Estas son visibles solo para la función y las funciones que llama. Cuando una función se completa, las variables locales desaparecen y los valores anteriores se restauran.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="5f461311-5024-45a5-bb41-822f72c998c0" class="code code-wrap"><code class="language-Shell">funcion_ejemplo() {
+  local variable_local=&quot;Hola&quot;
+  echo $variable_local
+}
+
+funcion_ejemplo  # Salida: Hola
+</code></pre><p id="630db633-095f-48fc-bffd-d906464472d9" class="">Las funciones pueden ser recursivas, y la variable <code>FUNCNEST</code> limita la profundidad de la pila de llamadas. <code>return</code> finaliza una función y permite la ejecución continua después de la llamada.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="04689b54-6f12-4006-8887-b241786321e4" class="code code-wrap"><code class="language-Shell">funcion_recursiva() {
+  if [ $1 -eq 0 ]; then
+    return
+  fi
+  echo $1
+  funcion_recursiva $(( $1 - 1 ))
+}
+
+funcion_recursiva 3  # Salida: 3 2 1
+</code></pre><p id="48f07e6f-ae7e-444b-8a9d-a1b4611b93fd" class="">En resumen, las funciones son una herramienta poderosa para organizar y reutilizar código en la shell.</p><p id="7ad5e270-62de-4a56-83d5-bd55d870e955" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
