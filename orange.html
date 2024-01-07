@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de la Caída de Servicio y Ciberataque en Orange España</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #FF6600;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .tweet {
+            background-color: #EFEFEF;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #666;
+        }
+
+        .note {
+            background-color: #FFFFCC;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Análisis de la Caída de Servicio y Ciberataque en Orange España</h1>
+
+    <p>Los usuarios de Orange España se vieron afectados esta tarde por una interrupción en el servicio de internet en todo el país. La compañía confirmó a través de sus redes sociales que estaban trabajando para restablecer el servicio lo antes posible.</p>
+
+    <p>"Estamos trabajando para que el servicio se restablezca lo antes posible", afirmó la compañía en un comunicado inicial. Más tarde, admitieron haber sufrido un ciberataque: "La cuenta de Orange en el centro de coordinación de redes IP (RIPE) ha sufrido un acceso indebido que ha afectado a la navegación de algunos de nuestros clientes".</p>
+
+    <div class="note">
+        <p>Nota: La cuenta de Orange en el centro de coordinación de redes IP (RIPE) ha sufrido un acceso indebido que ha afectado a la navegación de algunos de nuestros clientes. El servicio está prácticamente restablecido.</p>
+    </div>
+
+    <h2>Modificación de Credenciales de ASN en Orange España: Impacto en BGP y Redes</h2>
+
+    <p>La reciente intrusión cibernética en Orange España reveló una sofisticada manipulación de las credenciales de los Sistemas Autónomos (ASN, por sus siglas en inglés), desencadenando consecuencias significativas en el protocolo de enrutamiento BGP (Border Gateway Protocol) y la conectividad de la red. Los ASN son entidades identificadas por un número único que participan en la administración y el enrutamiento de bloques de direcciones IP.</p>
+
+    <p>En este ataque, el intruso logró acceder indebidamente al centro de coordinación de redes IP (RIPE) de Orange, donde reside la información crítica relacionada con los ASN. Mediante la modificación de las credenciales, el hacker invalidó los ASN asociados con Orange España, impactando directamente en la capacidad de los routers y switches para establecer conexiones y en el intercambio de información a través de BGP.</p>
+
+    <p>La compañía asegura que la incidencia fue generalizada, pero se detectó rápidamente. Aunque varios usuarios expresaron sus quejas en las redes sociales, Orange insiste en que están trabajando para resolverlo y que los datos de los clientes no están comprometidos, solo afectó a la navegación de algunos servicios.</p>
+
+    <div class="tweet">
+        <p>“Para los que nos comentabais que estabais teniendo problemas para acceder a algunas webs, el problema ya está resuelto para algunos clientes y esperamos recuperar el resto en breve. ¿Nos vais contando por aquí, por favor? Disculpad las molestias ocasionadas” - Orange España</p>
+    </div>
+
+    <p>Los problemas comenzaron alrededor de las 16:00 horas, según el registro de la web DownDetector, que monitorea en tiempo real los percances en servicios conectados a internet. A las siete de la tarde, la situación comenzó a mejorar, pero algunos usuarios seguían experimentando dificultades.</p>
+
+    <p>Algunos usuarios compartieron sus experiencias, como una clienta de Zaragoza, quien informó que estaba recuperando la conexión, aunque con "una rayita menos de cobertura" en sus dispositivos.</p>
+
+    <p>La compañía continúa trabajando para resolver la situación y agradece la paciencia de sus usuarios afectados.</p>
+
+    <div class="quote">
+        <h2>Entendiendo BGP y el Rol de los ASN:</h2>
+
+        <p>BGP es un protocolo esencial en la infraestructura de Internet que facilita la toma de decisiones de enrutamiento entre diferentes sistemas autónomos. Los ASN actúan como identificadores únicos para estos sistemas, permitiendo la definición de rutas y la propagación de información de enrutamiento. Cuando un ASN es comprometido, como en el caso de Orange España, se generan repercusiones directas en la interconexión entre sistemas autónomos, afectando la correcta transmisión de datos a través de la red.</p>
+
+        <p>La manipulación de las credenciales de los ASN por parte del atacante resulta en un rechazo por parte de otros sistemas autónomos, ya que las nuevas credenciales no son reconocidas como legítimas. Este proceso de rechazo conduce a interrupciones en la conectividad, afectando a los clientes de Orange España y generando un impacto generalizado en la calidad del servicio de Internet. La rápida detección y respuesta por parte de Orange son fundamentales para mitigar los efectos negativos de este tipo de ataques y restablecer la confianza en la integridad de los sistemas de enrutamiento.</p>
+
+    </div>
+
+</body>
+</html>
