@@ -1,53 +1,75 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Sitio - Contacto</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        .banner {
-            background-color: #3498db;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .contact-info {
-            background-color: #fff;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <title>D4rkDr4g0n</title>
+    <!-- Agrega la referencia al archivo CSS de Tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
 
-    <h1>Contacto</h1>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
 
-    <div class="banner">
-        <h2>D4rkDr4g0n</h2>
-    </div>
-
-    <div class="contact-info">
-        <p><strong>Nombre:</strong> Lucciano Campassi</p>
-        <p><strong>Contact Mail:</strong> luccianocamp@outlook.com</p>
-        <p><strong>Teléfono:</strong> +54 9 011 7006-6543</p>
-        <p><strong>Experiencia:</strong> Pentester Jr</p>
-        <p><strong>Carrera:</strong> Ingeniería en Sistemas de la Información</p>
-        <p><strong>Descripción:</strong> Pentester Jr y auditor de seguridad informática. Estoy aprendiendo y mejorando cada día con el fin de ser mejor y poder tener un mayor impacto en mi área. Soy un fanático de la tecnología que le encanta participar en todo lo que sea posible.</p>
+    <div class="flex flex-col h-screen relative">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 z-0"></div>
+        <div class="border-b border-gray-200 dark:border-gray-800 z-10">
+            <div class="mx-auto px-4 flex items-center h-14">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 mr-2 text-red-500" style="--darkreader-inline-stroke: currentColor;" data-darkreader-inline-stroke=""><polyline points="4 17 10 11 4 5"></polyline><line x1="12" x2="20" y1="19" y2="19"></line></svg>
+                <span class="text-2xl font-semibold text-white">D4rkDr4g0n</span>
+                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 ml-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-white" style="--darkreader-inline-stroke: currentColor;" data-darkreader-inline-stroke=""><path d="m9 18 6-6-6-6"></path></svg>
+                    <span class="sr-only">Toggle sidebar</span>
+                </button>
+            </div>
+        </div>
+        <div class="grid w-full max-w-sm gap-4">
+            <div class="grid gap-1">
+                <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">Name: Lucciano Campassi</label>
+            </div>
+            <div class="grid gap-1">
+                <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">Phone: +54 9 01 7006-6543</label>
+            </div>
+            <div class="grid gap-1">
+                <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">Email: luccianocamp@outlook.com</label>
+            </div>
+            <div class="grid gap-1">
+                <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">Let us contact you</label>
+                <div class="grid grid-cols-4 items-center gap-4 text-3xl">
+                    <!-- Reemplaza las URL de las redes sociales con las válidas -->
+                    <a class="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 border-gray-200 hover:border-gray-300 hover:shadow-md transition-colors dark:border-gray-800 dark:hover:border-gray-850 dark:border-gray-850 dark:hover:shadow-gray-850" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 peer-[data-raw-color] text-[var(--raw-color)]" style="--darkreader-inline-stroke: currentColor;" data-darkreader-inline-stroke=""><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                        <span class="sr-only">Twitter</span>
+                    </a>
+                    <a class="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 border-gray-200 hover:border-gray-300 hover:shadow-md transition-colors dark:border-gray-800 dark:hover:border-gray-850 dark:border-gray-850 dark:hover:shadow-gray-850" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 peer-[data-raw-color] text-[var(--raw-color)]" style="--darkreader-inline-stroke: currentColor;" data-darkreader-inline-stroke=""><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        <span class="sr-only">Facebook</span>
+                    </a>
+                    <a class="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 border-gray-200 hover:border-gray-300 hover:shadow-md transition-colors dark:border-gray-800 dark:hover:border-gray-850 dark:border-gray-850 dark:hover:shadow-gray-850" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 peer-[data-raw-color] text-[var(--raw-color)]" style="--darkreader-inline-stroke: currentColor;" data-darkreader-inline-stroke=""><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                        <span class="sr-only">Instagram</span>
+                    </a>
+                    <a class="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 border-gray-200 hover:border-gray-300 hover:shadow-md transition-colors dark:border-gray-800 dark:hover:border-gray-850 dark:border-gray-850 dark:hover:shadow-gray-850" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 peer-[data-raw-color] text-[var(--raw-color)]" style="--darkreader-inline-stroke: currentColor;" data-darkreader-inline-stroke=""><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        <span class="sr-only">LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+            <div class="grid gap-1">
+                <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">Additional Minimalist Technology Designs</label>
+                <div class="grid grid-cols-4 items-center gap-4 text-3xl"></div>
+            </div>
+        </div>
+        <div class="border-t border-gray-200 dark:border-gray-800 z-10">
+            <div class="mx-auto px-4 flex items-center h-14 justify-end">
+                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-white" style="--darkreader-inline-stroke: currentColor;" data-darkreader-inline-stroke=""><path d="m15 18-6-6 6-6"></path></svg>
+                    <span class="sr-only">Toggle sidebar</span>
+                </button>
+            </div>
+        </div>
     </div>
 
 </body>
+
 </html>
